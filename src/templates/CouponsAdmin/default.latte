@@ -1,0 +1,57 @@
+{block #title}Kupóny{/block}
+
+{block #content}
+
+<div class="row">
+  <div class="col-md-12">
+    <h1>
+      Kupóny
+      <small>
+       celkovo {$coupons->count('*')} / voľných {$availableCount}
+      </small>
+    </h1>
+    <hr>
+  </div>
+
+  <div class="col-md-12">
+    <ul class="nav nav-pills">
+      <li n:class="!$actualType ? active"><a n:href="default">Všetky</a></li>
+      <li n:foreach="$types as $type" n:class="$type->type == $actualType ? active"><a n:href="default $type->type">{$type->type} ({$type->count})</a></li>
+    </ul>
+    <hr>
+  </div>
+
+  <div class="col-md-12">
+    <table class="table table-striped table-hover table-bordered">
+      <thead>
+        <tr>
+          <th>Coupon</th>
+          <th>Typ</th>
+          <th>User</th>
+          <th>Predplatne</th>
+          <th>Kedy</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr n:foreach="$coupons as $coupon">
+          <td>
+            <code>{$coupon->code}</code>
+          </td>
+          <td>{$coupon->type}</td>
+          <td>
+            <a n:if="$coupon->user_id" n:href=":Users:UsersAdmin:show $coupon->user_id">{$coupon->user->email}</a>
+          </td>
+          <td>
+            <a n:if="$coupon->subscription" n:href=":Subscriptions:SubscriptionTypesAdmin:show $coupon->subscription->subscription_type_id">{$coupon->subscription->subscription_type->name}</a>
+          </td>
+          <td>
+            <span class="text-muted">{$coupon->assigned_at|userDate}</span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <hr>
+  </div>
+</div>
+
+{/block}

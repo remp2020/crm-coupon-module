@@ -1,0 +1,7 @@
+services:
+	moduleManager:
+		setup:
+			- addModule(Crm\CouponModule\CouponModule())
+
+	- Crm\CouponModule\Repository\CouponsRepository
+	- Crm\CouponModule\Events\NewSubscriptionHandler
