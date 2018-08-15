@@ -93,7 +93,7 @@ class NewSubscriptionHandler extends AbstractListener
         $coupon = $this->couponsRepository->assignCoupon($type, $subscription->user_id, $subscription->id);
 
         if (!$coupon) {
-            throw new CannotAssignCoupon('Nepodarilo sa priradit kod');
+            throw new CannotAssignCoupon("Unable to assign coupon type '{$type} to user_id '{$subscription->user_id}'");
         }
 
         $this->subscriptionsRepository->update($subscription, [
