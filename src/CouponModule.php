@@ -11,7 +11,13 @@ class CouponModule extends CrmModule
 {
     public function registerAdminMenuItems(MenuContainerInterface $menuContainer)
     {
-        $mainMenu = new MenuItem('Kupóny', ':Coupon:CouponsAdmin:default', 'fa fa-tag', 745, true);
+        $mainMenu = new MenuItem(
+            $this->translator->translate('coupon.menu.default'),
+            ':Coupon:CouponsAdmin:default',
+            'fa fa-tag',
+            745,
+            true
+        );
         $menuContainer->attachMenuItem($mainMenu);
     }
 

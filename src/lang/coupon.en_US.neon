@@ -1,0 +1,16 @@
+menu:
+	default: Coupons
+
+admin:
+	default:
+		title: Coupons
+		total: total
+		unused: unused
+		fields:
+			coupon: Coupon
+			type: Type
+			user: User
+			subscription: Subscription
+			assigned_at: Assigned at
+		filters:
+			all: All

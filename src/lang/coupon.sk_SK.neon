@@ -1,0 +1,16 @@
+menu:
+	default: Kupóny
+
+admin:
+	default:
+		title: Kupóny
+		total: celkovo
+		unused: voľných
+		fields:
+			coupon: Kupón
+			type: Typ
+			user: Užívateľ
+			subscription: Predplatné
+			assigned_at: Priradené
+		filters:
+			all: Všetky
