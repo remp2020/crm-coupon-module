@@ -14,13 +14,10 @@ use League\Event\EventInterface;
 
 class NewSubscriptionHandler extends AbstractListener
 {
-    /** @var CouponsRepository  */
     private $couponsRepository;
 
-    /** @var array */
-    private $subscriptionTypesCodes;
+    private $subscriptionTypesCodes = [];
 
-    /** @var SalesFunnelsMetaRepository  */
     private $salesFunnelsMetaRepository;
 
     private $paymentsRepository;
@@ -29,11 +26,19 @@ class NewSubscriptionHandler extends AbstractListener
 
     private $emitter;
 
+    /**
+     * NewSubscriptionHandler constructor.
+     * @param CouponsRepository $couponsRepository
+     * @param SalesFunnelsMetaRepository $salesFunnelsMetaRepository
+     * @param PaymentsRepository $paymentsRepository
+     * @param SubscriptionsRepository $subscriptionsRepository
+     * @param Emitter $emitter
+     */
     public function __construct(
         CouponsRepository $couponsRepository,
         SalesFunnelsMetaRepository $salesFunnelsMetaRepository,
-        PaymentsRepository $paymentsRepository,
         SubscriptionsRepository $subscriptionsRepository,
+        PaymentsRepository $paymentsRepository,
         Emitter $emitter
     ) {
         $this->couponsRepository = $couponsRepository;
