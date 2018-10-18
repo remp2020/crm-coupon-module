@@ -26,19 +26,11 @@ class NewSubscriptionHandler extends AbstractListener
 
     private $emitter;
 
-    /**
-     * NewSubscriptionHandler constructor.
-     * @param CouponsRepository $couponsRepository
-     * @param SalesFunnelsMetaRepository $salesFunnelsMetaRepository
-     * @param PaymentsRepository $paymentsRepository
-     * @param SubscriptionsRepository $subscriptionsRepository
-     * @param Emitter $emitter
-     */
     public function __construct(
         CouponsRepository $couponsRepository,
         SalesFunnelsMetaRepository $salesFunnelsMetaRepository,
-        SubscriptionsRepository $subscriptionsRepository,
         PaymentsRepository $paymentsRepository,
+        SubscriptionsRepository $subscriptionsRepository,
         Emitter $emitter
     ) {
         $this->couponsRepository = $couponsRepository;
