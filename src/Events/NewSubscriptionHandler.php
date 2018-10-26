@@ -14,13 +14,10 @@ use League\Event\EventInterface;
 
 class NewSubscriptionHandler extends AbstractListener
 {
-    /** @var CouponsRepository  */
     private $couponsRepository;
 
-    /** @var array */
-    private $subscriptionTypesCodes;
+    private $subscriptionTypesCodes = [];
 
-    /** @var SalesFunnelsMetaRepository  */
     private $salesFunnelsMetaRepository;
 
     private $paymentsRepository;
