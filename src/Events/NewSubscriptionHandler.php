@@ -100,7 +100,7 @@ class NewSubscriptionHandler extends AbstractListener
         $payment = $this->paymentsRepository->subscriptionPayment($subscription);
         $this->salesFunnelsMetaRepository->updateValue($payment->sales_funnel, 'available_coupons', $this->couponsRepository->availableCoupons($type));
 
-        $this->emitter->emit(new NotificationEvent($subscription->user, $email, [
+        $this->emitter->emit(new NotificationEvent($this->emitter, $subscription->user, $email, [
             'subscription' => $subscription->toArray(),
             'coupon' => $coupon->code,
         ], "subscription.{$subscription->id}", []));
