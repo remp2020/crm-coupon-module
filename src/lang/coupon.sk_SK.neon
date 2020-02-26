@@ -1,3 +1,7 @@
+menu:
+	coupons: Kupóny
+	generator: Generátor kupónov
+
 admin:
 	default:
 		title: Kupóny
@@ -6,8 +10,45 @@ admin:
 		fields:
 			coupon: Kupón
 			type: Typ
-			user: Užívateľ
-			subscription: Predplatné
-			assigned_at: Priradené
-		filters:
-			all: Všetky
+			user: Používateľ
+			subscription_type: Typ predplatného
+			subscription_type_name: Typ vytvoreného predplatného
+			created_at: Vytvorený
+			assigned_at: Priradený
+
+	generate:
+		title: Generátor kupónov
+
+	component:
+		filter_form:
+			text:
+				label: Kupón
+				placeholder: "napr. ABC123DE"
+			type:
+				label: Typ
+				placeholder: "Vyberte typ kupónu"
+			submit: Filtruj
+			cancel: Zruš filter
+
+		generate_form:
+			type:
+				label: Typ kupónu
+				placeholder: "napr. summer promo"
+				description: "Typ kupónu by mal rozlišovať rôzne akcie v prípade potreby viacerých generovaní kupónov."
+				required: Typ kupónu je povinný
+			subscription_type_id:
+				label: Typ predplatného
+				placeholder: "napr. web/mesiac"
+				description: "Typ predplatného určuje aké predplatné používateľ dostane po aktivácií kupónu. Predplatné sa aktivuje štandardným spôsobom podľa nastavenia typu predplatného."
+				required: Typ predplatného je povinný
+			subscription_type_name_id:
+				label: Typ vytvoreného predplatného
+				placeholder: "napr. regular"
+				description: "Typ vytvoreného predplatného sa používa na určenie či je predplatné platené alebo nie (naprieč celým CRM) a na spustenie rôznych (notifikačných) scenárov."
+				required: Typ vytvoreného predplatného je povinný
+			count:
+				label: Počet kupónov
+				placeholder: napr. 10
+				required: "Počet kupónov, ktoré sa majú vygenerovať, je povinný"
+			submit: Vygenerovať
+			success: Kupóny boli vygenerované.

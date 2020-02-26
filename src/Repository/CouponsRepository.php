@@ -3,20 +3,60 @@
 namespace Crm\CouponModule\Repository;
 
 use Crm\ApplicationModule\Repository;
-use Nette\Utils\DateTime;
+use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Nette\Caching\IStorage;
+use Nette\Database\Context;
+use Nette\Database\Table\IRow;
 
 class CouponsRepository extends Repository
 {
     protected $tableName = 'coupons';
 
-    public function all($type = false)
-    {
-        $where = [];
-        if ($type) {
-            $where = ['type' => $type];
-        }
+    private $subscriptionsRepository;
 
-        return $this->getTable()->where($where)->order('created_at');
+    public function __construct(
+        SubscriptionsRepository $subscriptionsRepository,
+        Context $database,
+        IStorage $cacheStorage = null
+    ) {
+        parent::__construct($database, $cacheStorage);
+        $this->subscriptionsRepository = $subscriptionsRepository;
+    }
+
+    public function add($type, $batchUuid, $subscriptionTypeId, $subscriptionTypeNameId, $couponCodeId)
+    {
+        return $this->insert([
+            'type' => $type,
+            'batch_uuid' => $batchUuid,
+            'subscription_type_id' => $subscriptionTypeId,
+            'subscription_type_name_id' => $subscriptionTypeNameId,
+            'coupon_code_id' => $couponCodeId,
+            'created_at' => new \DateTime(),
+            'updated_at' => new \DateTime(),
+        ]);
+    }
+
+    public function update(IRow &$row, $data)
+    {
+        $data['updated_at'] = new \DateTime();
+        return parent::update($row, $data);
+    }
+
+    public function all()
+    {
+        return $this->getTable()->order('created_at DESC');
+    }
+
+    public function search($text, $type)
+    {
+        $query = $this->all();
+        if ($text) {
+            $query->where(['coupon_code.code' => $text]);
+        }
+        if ($type) {
+            $query->where(['type' => $type]);
+        }
+        return $query;
     }
 
     public function allTypes()
@@ -24,35 +64,23 @@ class CouponsRepository extends Repository
         return $this->getTable()->group('type')->select('type, count(*) AS count')->fetchAll();
     }
 
-    public function assignCoupon($type, $userId, $subscriptionId)
+    public function activate(IRow $coupon, IRow $user)
     {
-        // nepekne fuj!, robi sa to na 2 query, v nejakej situacii ak naraz zbehnu 2 platby tak to moze robit problem ;-(
-        $coupon = $this->available($type)->order('RAND()')->limit(1)->fetch();
-        if (!$coupon) {
-            return false;
-        }
+        $subscription = $this->subscriptionsRepository->add(
+            $coupon->subscription_type,
+            false,
+            $user,
+            $coupon->subscription_type_name->type,
+            null,
+            null,
+            null,
+            null,
+            false
+        );
+
         $this->update($coupon, [
-            'user_id' => $userId,
-            'subscription_id' => $subscriptionId,
-            'updated_at' => new DateTime(),
-            'assigned_at' => new DateTime()
+            'assigned_at' => new \DateTime(),
+            'subscription_id' => $subscription->id,
         ]);
-
-        return $coupon;
-    }
-
-    public function availableCoupons($type = false)
-    {
-        return $this->available($type)->count('*');
-    }
-
-    private function available($type = false)
-    {
-        $where = ['assigned_at' => null];
-        if ($type) {
-            $where['type'] = $type;
-        }
-
-        return $this->getTable()->where($where);
     }
 }

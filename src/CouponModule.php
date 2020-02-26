@@ -5,7 +5,6 @@ namespace Crm\CouponModule;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
-use League\Event\Emitter;
 
 class CouponModule extends CrmModule
 {
@@ -13,20 +12,27 @@ class CouponModule extends CrmModule
     {
         $mainMenu = new MenuItem(
             '',
-            ':Coupon:CouponsAdmin:default',
+            '#coupons',
             'fa fa-tag',
             791,
             true
         );
-        $menuContainer->attachMenuItem($mainMenu);
-    }
 
-    public function registerEventHandlers(Emitter $emitter)
-    {
-        $emitter->addListener(
-            \Crm\SubscriptionsModule\Events\NewSubscriptionEvent::class,
-            $this->getInstance(\Crm\CouponModule\Events\NewSubscriptionHandler::class),
-            -199
+        $menuItem = new MenuItem(
+            $this->translator->translate('coupon.menu.coupons'),
+            ':Coupon:CouponsAdmin:default',
+            'fa fa-tag',
+            100
         );
+        $mainMenu->addChild($menuItem);
+        $menuItem = new MenuItem(
+            $this->translator->translate('coupon.menu.generator'),
+            ':Coupon:CouponsAdmin:generate',
+            'fa fa-cogs',
+            200
+        );
+        $mainMenu->addChild($menuItem);
+
+        $menuContainer->attachMenuItem($mainMenu);
     }
 }

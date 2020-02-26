@@ -14,10 +14,7 @@
   </div>
 
   <div class="col-md-12">
-    <ul class="nav nav-pills">
-      <li n:class="!$actualType ? active"><a n:href="default">{_coupon.admin.default.filters.all}</a></li>
-      <li n:foreach="$types as $type" n:class="$type->type == $actualType ? active"><a n:href="default $type->type">{$type->type} ({$type->count})</a></li>
-    </ul>
+    {control filterForm}
     <hr>
   </div>
 
@@ -28,21 +25,29 @@
           <th>{_coupon.admin.default.fields.coupon}</th>
           <th>{_coupon.admin.default.fields.type}</th>
           <th>{_coupon.admin.default.fields.user}</th>
-          <th>{_coupon.admin.default.fields.subscription}</th>
+          <th>{_coupon.admin.default.fields.subscription_type}</th>
+          <th>{_coupon.admin.default.fields.subscription_type_name}</th>
+          <th>{_coupon.admin.default.fields.created_at}</th>
           <th>{_coupon.admin.default.fields.assigned_at}</th>
         </tr>
       </thead>
       <tbody>
         <tr n:foreach="$coupons as $coupon">
           <td>
-            <code>{$coupon->code}</code>
+            <code>{$coupon->coupon_code->code}</code>
           </td>
           <td>{$coupon->type}</td>
           <td>
-            <a n:if="$coupon->user_id" n:href=":Users:UsersAdmin:show $coupon->user_id">{$coupon->user->email}</a>
+            <a n:if="$coupon->subscription" n:href=":Users:UsersAdmin:show $coupon->subscription->user_id">{$coupon->subscription->user->email}</a>
           </td>
           <td>
-            <a n:if="$coupon->subscription" n:href=":Subscriptions:SubscriptionTypesAdmin:show $coupon->subscription->subscription_type_id">{$coupon->subscription->subscription_type->name}</a>
+            <a n:href=":Subscriptions:SubscriptionTypesAdmin:show $coupon->subscription_type_id">{$coupon->subscription_type->name}</a>
+          </td>
+          <td>
+            {$coupon->subscription_type_name->type}
+          </td>
+          <td>
+            <span class="text-muted">{$coupon->created_at|userDate}</span>
           </td>
           <td>
             <span class="text-muted">{$coupon->assigned_at|userDate}</span>
@@ -50,7 +55,8 @@
         </tr>
       </tbody>
     </table>
-    <hr>
+
+    {control vp}
   </div>
 </div>
 

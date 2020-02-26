@@ -4,4 +4,9 @@ services:
 			- addModule(Crm\CouponModule\CouponModule())
 
 	- Crm\CouponModule\Repository\CouponsRepository
-	- Crm\CouponModule\Events\NewSubscriptionHandler
+	- Crm\CouponModule\Repository\CouponCodesRepository
+	- Crm\CouponModule\Forms\AdminFilterFormFactory
+	- Crm\CouponModule\Forms\GenerateFormFactory
+
+	couponGenerator:
+	    class: Crm\CouponModule\DefaultCouponGenerator
