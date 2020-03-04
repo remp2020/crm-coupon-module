@@ -3,8 +3,9 @@ services:
 		setup:
 			- addModule(Crm\CouponModule\CouponModule())
 
-	- Crm\CouponModule\Repository\CouponsRepository
-	- Crm\CouponModule\Repository\CouponCodesRepository
+	couponsRepository: Crm\CouponModule\Repository\CouponsRepository
+	couponCodesRepository: Crm\CouponModule\Repository\CouponCodesRepository
+
 	- Crm\CouponModule\Forms\AdminFilterFormFactory
 	- Crm\CouponModule\Forms\GenerateFormFactory
 
