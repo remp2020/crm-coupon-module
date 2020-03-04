@@ -23,7 +23,7 @@ class CouponsRepository extends Repository
         $this->subscriptionsRepository = $subscriptionsRepository;
     }
 
-    public function add($type, $batchUuid, $subscriptionTypeId, $subscriptionTypeNameId, $couponCodeId)
+    final public function add($type, $batchUuid, $subscriptionTypeId, $subscriptionTypeNameId, $couponCodeId)
     {
         return $this->insert([
             'type' => $type,
@@ -36,18 +36,18 @@ class CouponsRepository extends Repository
         ]);
     }
 
-    public function update(IRow &$row, $data)
+    final public function update(IRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);
     }
 
-    public function all()
+    final public function all()
     {
         return $this->getTable()->order('created_at DESC');
     }
 
-    public function search($text, $type)
+    final public function search($text, $type)
     {
         $query = $this->all();
         if ($text) {
@@ -59,12 +59,12 @@ class CouponsRepository extends Repository
         return $query;
     }
 
-    public function allTypes()
+    final public function allTypes()
     {
         return $this->getTable()->group('type')->select('type, count(*) AS count')->fetchAll();
     }
 
-    public function activate(IRow $coupon, IRow $user)
+    final public function activate(IRow $coupon, IRow $user)
     {
         $subscription = $this->subscriptionsRepository->add(
             $coupon->subscription_type,

@@ -10,7 +10,7 @@ class CouponCodesRepository extends Repository
 {
     protected $tableName = 'coupon_codes';
 
-    public function add($code)
+    final public function add($code)
     {
         try {
             return $this->insert([
