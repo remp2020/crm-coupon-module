@@ -38,7 +38,7 @@
           </td>
           <td>{$coupon->type}</td>
           <td>
-            <a n:if="$coupon->subscription" n:href=":Users:UsersAdmin:show $coupon->subscription->user_id">{$coupon->subscription->user->email}</a>
+            <a n:if="$coupon->subscription" n:href=":Users:UsersAdmin:show $coupon->subscription->user_id">{$coupon->subscription->user->public_name}</a>
           </td>
           <td>
             <a n:href=":Subscriptions:SubscriptionTypesAdmin:show $coupon->subscription_type_id">{$coupon->subscription_type->name}</a>
