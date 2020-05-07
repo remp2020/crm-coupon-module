@@ -91,6 +91,7 @@ class CouponsRepository extends Repository
         $subscription = $this->subscriptionsRepository->add(
             $coupon->subscription_type,
             false,
+            $coupon->is_paid,
             $user,
             $coupon->subscription_type_name->type,
             null,
