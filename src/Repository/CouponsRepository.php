@@ -30,7 +30,7 @@ class CouponsRepository extends Repository
         $this->emitter = $emitter;
     }
 
-    final public function add($type, $batchUuid, $subscriptionTypeId, $subscriptionTypeNameId, $couponCodeId)
+    final public function add(string $type, string $batchUuid, int $subscriptionTypeId, int $subscriptionTypeNameId, int $couponCodeId, bool $isPaid)
     {
         return $this->insert([
             'type' => $type,
@@ -38,6 +38,7 @@ class CouponsRepository extends Repository
             'subscription_type_id' => $subscriptionTypeId,
             'subscription_type_name_id' => $subscriptionTypeNameId,
             'coupon_code_id' => $couponCodeId,
+            'is_paid' => $isPaid,
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
         ]);

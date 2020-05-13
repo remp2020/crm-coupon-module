@@ -44,11 +44,14 @@ admin:
 			subscription_type_name_id:
 				label: Type of created subscription
 				placeholder: "e.g. regular"
-				description: "Type of created subscription is being used to determine whether subscription should be counted as something user paid for or not across the CRM and to triger different (notification) scenarios."
+				description: "Type of created subscription is being used to triger different (notification) scenarios."
 				required: Type of created subscription is required
 			count:
 				label: Count
 				placeholder: e.g. 10
 				required: "Number of coupons to generate is required"
+			is_paid:
+				label: "Paid"
+				description: "Paid is being used to determine whether subscription should be counted as something user paid for or not across the CRM."
 			submit: Generate
 			success: Coupons were generated.

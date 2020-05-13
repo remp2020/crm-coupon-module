@@ -73,6 +73,9 @@ class GenerateFormFactory
             ->setRequired('coupon.admin.component.generate_form.count.required');
         $countElem->getControlPrototype()->addAttributes(['pattern' => '[0-9]*']);
 
+        $form->addCheckbox('is_paid', 'coupon.admin.component.generate_form.is_paid.label')
+            ->setOption('description', 'coupon.admin.component.generate_form.is_paid.description');
+
         $form->addSubmit('send', 'coupon.admin.component.generate_form.submit')
             ->getControlPrototype()
             ->setName('button')
@@ -92,7 +95,8 @@ class GenerateFormFactory
                 $batchUuid,
                 $values->subscription_type_id,
                 $values->subscription_type_name_id,
-                $couponCode->id
+                $couponCode->id,
+                $values->is_paid
             );
         }
 

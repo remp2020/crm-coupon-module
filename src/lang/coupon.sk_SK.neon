@@ -44,11 +44,14 @@ admin:
 			subscription_type_name_id:
 				label: Typ vytvoreného predplatného
 				placeholder: "napr. regular"
-				description: "Typ vytvoreného predplatného sa používa na určenie či je predplatné platené alebo nie (naprieč celým CRM) a na spustenie rôznych (notifikačných) scenárov."
+				description: "Typ vytvoreného predplatného sa používa na spustenie rôznych (notifikačných) scenárov."
 				required: Typ vytvoreného predplatného je povinný
 			count:
 				label: Počet kupónov
 				placeholder: napr. 10
 				required: "Počet kupónov, ktoré sa majú vygenerovať, je povinný"
+			is_paid:
+				label: "Platený"
+				description: "Platený sa používa na určenie či je predplatné platené alebo nie (naprieč celým CRM)."
 			submit: Vygenerovať
 			success: Kupóny boli vygenerované.
