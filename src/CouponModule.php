@@ -2,9 +2,14 @@
 
 namespace Crm\CouponModule;
 
+use Crm\ApiModule\Api\ApiRoutersContainerInterface;
+use Crm\ApiModule\Router\ApiIdentifier;
+use Crm\ApiModule\Router\ApiRoute;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
+use Crm\CouponModule\Api\ActivateCouponApiHandler;
+use Crm\UsersModule\Auth\UserTokenAuthorization;
 
 class CouponModule extends CrmModule
 {
@@ -34,5 +39,16 @@ class CouponModule extends CrmModule
         $mainMenu->addChild($menuItem);
 
         $menuContainer->attachMenuItem($mainMenu);
+    }
+
+    public function registerApiCalls(ApiRoutersContainerInterface $apiRoutersContainer)
+    {
+        $apiRoutersContainer->attachRouter(
+            new ApiRoute(
+                new ApiIdentifier('1', 'coupon', 'activate'),
+                ActivateCouponApiHandler::class,
+                UserTokenAuthorization::class
+            )
+        );
     }
 }

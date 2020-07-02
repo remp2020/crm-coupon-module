@@ -11,3 +11,5 @@ services:
 
 	couponGenerator:
 	    class: Crm\CouponModule\DefaultCouponGenerator
+
+	activateCouponApiHandler: Crm\CouponModule\Api\ActivateCouponApiHandler
