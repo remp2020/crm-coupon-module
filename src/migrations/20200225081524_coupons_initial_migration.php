@@ -49,7 +49,6 @@ SQL;
             $this->execute($migrateSql);
 
             $this->table('coupons')
-                ->removeColumn('code')
                 ->changeColumn('batch_uuid', 'string', ['null' => false])
                 ->changeColumn('coupon_code_id', 'integer', ['null' => false, 'after' => 'type'])
                 ->changeColumn('subscription_type_id', 'integer', ['null' => false, 'after' => 'coupon_code_id'])
