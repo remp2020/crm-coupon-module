@@ -28,6 +28,7 @@
           <th>{_coupon.admin.default.fields.subscription_type}</th>
           <th>{_coupon.admin.default.fields.subscription_type_name}</th>
           <th>{_coupon.admin.default.fields.created_at}</th>
+          <th>{_coupon.admin.default.fields.expires_at}</th>
           <th>{_coupon.admin.default.fields.assigned_at}</th>
         </tr>
       </thead>
@@ -48,6 +49,9 @@
           </td>
           <td>
             <span class="text-muted">{$coupon->created_at|userDate}</span>
+          </td>
+          <td>
+            <span class="text-muted">{$coupon->expires_at|userDate}</span>
           </td>
           <td>
             <span class="text-muted">{$coupon->assigned_at|userDate}</span>

@@ -16,6 +16,7 @@ use Crm\SubscriptionsModule\Seeders\SubscriptionLengthMethodSeeder;
 use Crm\UsersModule\Auth\UserManager;
 use Crm\UsersModule\Repository\UsersRepository;
 use Nette\Http\Response;
+use Nette\Utils\Json;
 
 class ActivateCouponApiHandlerTest extends DatabaseTestCase
 {
@@ -68,7 +69,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
             ->andReturn(['token' => (object)['user_id' => $userRow->id]])
             ->getMock();
 
-        $this->activateCouponApiHandler->setRawPayload(json_encode(['code' => 'test']));
+        $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => 'test']));
         $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
 
         $payload = $response->getPayload();
@@ -83,11 +84,11 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
      */
     public function testAlreadyUsedCode(): void
     {
-        [$userRow, $couponRow, $couponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
+        [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
 
-        $this->couponsRepository->activate($userRow, $couponRow);
+        $this->couponsRepository->activate($userRow, $validCouponRow);
 
-        $this->activateCouponApiHandler->setRawPayload(json_encode(['code' => $couponCodeRow->code]));
+        $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
         $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
 
         $payload = $response->getPayload();
@@ -102,14 +103,31 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
      */
     public function testSuccessActivation(): void
     {
-        [$userRow, $couponRow, $couponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
+        [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
 
-        $this->activateCouponApiHandler->setRawPayload(json_encode(['code' => $couponCodeRow->code]));
+        $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
         $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
         $payload = $response->getPayload();
 
         $this->assertEquals(Response::S200_OK, $response->getHttpCode());
-        $this->assertEquals($couponRow->id, $payload['coupon_id']);
+        $this->assertEquals($validCouponRow->id, $payload['coupon_id']);
+    }
+
+    /**
+     * @group coupon
+     */
+    public function testExpiredCoupon(): void
+    {
+        [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
+
+        $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $expiredCouponCodeRow->code]));
+        $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
+
+        $payload = $response->getPayload();
+
+        $this->assertEquals(Response::S410_GONE, $response->getHttpCode());
+        $this->assertEquals('error', $payload['status']);
+        $this->assertEquals('coupon_expired', $payload['code']);
     }
 
     private function prepareDataForTest(): array
@@ -124,7 +142,8 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         /** @var CouponGeneratorInterface $couponGenerator */
         $couponGenerator = $this->inject(DefaultCouponGenerator::class);
-        $couponCodeRow = $couponGenerator->generate();
+        $validCouponCodeRow = $couponGenerator->generate();
+        $expiredCouponCodeRow = $couponGenerator->generate();
 
         /** @var SubscriptionTypeBuilder $subscriptionTypeBuilder */
         $subscriptionTypeBuilder = $this->inject(SubscriptionTypeBuilder::class);
@@ -141,15 +160,26 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $subscriptionTypeNamesRepository = $this->getRepository(SubscriptionTypeNamesRepository::class);
         $subscriptionTypeNamesRow = $subscriptionTypeNamesRepository->add('test', 31);
 
-        $couponRow = $this->couponsRepository->add(
+        $validCouponRow = $this->couponsRepository->add(
             'test',
             'batuuid',
             $subscriptionTypeRow->id,
             $subscriptionTypeNamesRow->id,
-            $couponCodeRow->id,
-            0
+            $validCouponCodeRow->id,
+            0,
+            null
         );
 
-        return [$userRow, $couponRow, $couponCodeRow, $userTokenAuthorization];
+        $expiredCouponRow = $this->couponsRepository->add(
+            'test',
+            'batuuid',
+            $subscriptionTypeRow->id,
+            $subscriptionTypeNamesRow->id,
+            $expiredCouponCodeRow->id,
+            0,
+            new \DateTime('-1 hour')
+        );
+
+        return [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization];
     }
 }

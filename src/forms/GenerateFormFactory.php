@@ -10,6 +10,7 @@ use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Crm\SubscriptionsModule\Subscription\SubscriptionType;
 use Nette\Application\UI\Form;
 use Nette\Localization\ITranslator;
+use Nette\Utils\DateTime;
 use Ramsey\Uuid\Uuid;
 use Tomaj\Form\Renderer\BootstrapRenderer;
 
@@ -76,6 +77,11 @@ class GenerateFormFactory
         $form->addCheckbox('is_paid', 'coupon.admin.component.generate_form.is_paid.label')
             ->setOption('description', 'coupon.admin.component.generate_form.is_paid.description');
 
+        $form->addText('expires_at', 'coupon.admin.component.generate_form.expires_at.label')
+            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.expires_at.placeholder')
+            ->setAttribute('class', 'flatpickr')
+            ->setAttribute('flatpickr_datetime', "1");
+
         $form->addSubmit('send', 'coupon.admin.component.generate_form.submit')
             ->getControlPrototype()
             ->setName('button')
@@ -89,6 +95,11 @@ class GenerateFormFactory
     {
         $batchUuid = Uuid::uuid4();
         foreach (range(1, $values->count) as $_) {
+            $expiresAt = null;
+            if (isset($values['expires_at']) && $values['expires_at'] !== '') {
+                $expiresAt = DateTime::from($values['expires_at'])->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            }
+
             $couponCode = $this->couponGenerator->generate();
             $this->couponsRepository->add(
                 $values->type,
@@ -96,7 +107,8 @@ class GenerateFormFactory
                 $values->subscription_type_id,
                 $values->subscription_type_name_id,
                 $couponCode->id,
-                $values->is_paid
+                $values->is_paid,
+                $expiresAt
             );
         }
 

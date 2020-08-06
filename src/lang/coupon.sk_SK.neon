@@ -15,6 +15,7 @@ admin:
 			subscription_type_name: Typ vytvoreného predplatného
 			created_at: Vytvorený
 			assigned_at: Priradený
+			expires_at: Expirácia
 
 	generate:
 		title: Generátor kupónov
@@ -53,5 +54,8 @@ admin:
 			is_paid:
 				label: "Platený"
 				description: "Platený sa používa na určenie či je predplatné platené alebo nie (naprieč celým CRM)."
+			expires_at:
+				label: "Dátum expirácie kupónu"
+				placeholder: napr. 14.2.2016 14:21
 			submit: Vygenerovať
 			success: Kupóny boli vygenerované.

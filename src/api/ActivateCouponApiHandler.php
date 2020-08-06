@@ -7,11 +7,12 @@ use Crm\ApiModule\Api\JsonResponse;
 use Crm\ApiModule\Api\JsonValidationTrait;
 use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
 use Crm\CouponModule\CouponAlreadyAssignedException;
+use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Repository\CouponsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\UsersModule\Repository\UsersRepository;
+use DateTime;
 use Nette\Http\Response;
-use \DateTime;
 
 class ActivateCouponApiHandler extends ApiHandler
 {
@@ -76,6 +77,14 @@ class ActivateCouponApiHandler extends ApiHandler
                 'code' => 'coupon_already_used',
             ]);
             $response->setHttpCode(Response::S400_BAD_REQUEST);
+            return $response;
+        } catch (CouponExpiredException $exception) {
+            $response = new JsonResponse([
+                'status' => 'error',
+                'message' => 'Coupon expired',
+                'code' => 'coupon_expired',
+            ]);
+            $response->setHttpCode(Response::S410_GONE);
             return $response;
         }
 

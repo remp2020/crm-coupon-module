@@ -4,8 +4,10 @@ namespace Crm\CouponModule\Repository;
 
 use Crm\ApplicationModule\Repository;
 use Crm\CouponModule\CouponAlreadyAssignedException;
+use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Events\CouponActivatedEvent;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use DateTime;
 use League\Event\Emitter;
 use Nette\Caching\IStorage;
 use Nette\Database\Context;
@@ -30,7 +32,7 @@ class CouponsRepository extends Repository
         $this->emitter = $emitter;
     }
 
-    final public function add(string $type, string $batchUuid, int $subscriptionTypeId, int $subscriptionTypeNameId, int $couponCodeId, bool $isPaid)
+    final public function add(string $type, string $batchUuid, int $subscriptionTypeId, int $subscriptionTypeNameId, int $couponCodeId, bool $isPaid, ?DateTime $expiresAt = null)
     {
         return $this->insert([
             'type' => $type,
@@ -41,6 +43,7 @@ class CouponsRepository extends Repository
             'is_paid' => $isPaid,
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
+            'expires_at' => $expiresAt
         ]);
     }
 
@@ -82,11 +85,15 @@ class CouponsRepository extends Repository
      * @param IRow $user
      * @param IRow $coupon
      * @throws CouponAlreadyAssignedException
+     * @throws CouponExpiredException
      */
     final public function activate(IRow $user, IRow $coupon)
     {
         if ($coupon->assigned_at !== null) {
             throw new CouponAlreadyAssignedException('Coupon already assigned: {$coupon}');
+        }
+        if (isset($coupon->expires_at) && $coupon->expires_at < new DateTime()) {
+            throw new CouponExpiredException('Coupon expired: {$coupon}');
         }
 
         $subscription = $this->subscriptionsRepository->add(

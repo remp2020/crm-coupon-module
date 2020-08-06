@@ -15,6 +15,7 @@ admin:
 			subscription_type_name: Type of created subscription
 			created_at: Created at
 			assigned_at: Assigned at
+			expires_at: Expiration
 
 	generate:
 		title: Coupon generator
@@ -53,5 +54,8 @@ admin:
 			is_paid:
 				label: "Paid"
 				description: "Paid is being used to determine whether subscription should be counted as something user paid for or not across the CRM."
+			expires_at:
+				label: Coupon expiration date
+				placeholder: e.g. 14.2.2016 14:21
 			submit: Generate
 			success: Coupons were generated.
