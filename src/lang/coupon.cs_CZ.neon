@@ -16,6 +16,8 @@ admin:
 			created_at: Vytvořený
 			assigned_at: Přiřazený
 			expires_at: Expirace
+		export:
+			csv: Export CSV
 
 	generate:
 		title: Generátor kupónů

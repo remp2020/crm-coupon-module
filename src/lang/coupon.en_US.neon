@@ -16,6 +16,8 @@ admin:
 			created_at: Created at
 			assigned_at: Assigned at
 			expires_at: Expiration
+		export:
+			csv: Export CSV
 
 	generate:
 		title: Coupon generator
