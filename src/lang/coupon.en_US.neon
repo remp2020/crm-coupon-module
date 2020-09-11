@@ -59,5 +59,9 @@ admin:
 			expires_at:
 				label: Coupon expiration date
 				placeholder: e.g. 14.2.2016 14:21
+			prefix:
+				label: Prefix
+				placeholder: e.g. ABC-
+				description: Prefix to be used for each generated code.
 			submit: Generate
 			success: Coupons were generated.

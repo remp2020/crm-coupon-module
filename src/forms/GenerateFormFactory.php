@@ -77,6 +77,9 @@ class GenerateFormFactory
         $form->addCheckbox('is_paid', 'coupon.admin.component.generate_form.is_paid.label')
             ->setOption('description', 'coupon.admin.component.generate_form.is_paid.description');
 
+        $form->addText('prefix', 'coupon.admin.component.generate_form.prefix.label')
+            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.prefix.placeholder');
+
         $form->addText('expires_at', 'coupon.admin.component.generate_form.expires_at.label')
             ->setAttribute('placeholder', 'coupon.admin.component.generate_form.expires_at.placeholder')
             ->setAttribute('class', 'flatpickr')
@@ -98,6 +101,10 @@ class GenerateFormFactory
             $expiresAt = null;
             if (isset($values['expires_at']) && $values['expires_at'] !== '') {
                 $expiresAt = DateTime::from($values['expires_at'])->setTimezone(new \DateTimeZone(date_default_timezone_get()));
+            }
+
+            if ($values['prefix']) {
+                $this->couponGenerator->setPrefix($values['prefix']);
             }
 
             $couponCode = $this->couponGenerator->generate();

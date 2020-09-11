@@ -11,6 +11,8 @@ class DefaultCouponGenerator implements CouponGeneratorInterface
 
     private $length = 8;
 
+    private $prefix;
+
     // alphabet without colliding characters (0 vs O, I vs l)
     private $charset = 'ABCDEFGHKLMNPQRSTUVWXYZ123456789';
 
@@ -29,11 +31,16 @@ class DefaultCouponGenerator implements CouponGeneratorInterface
         $this->charset = $charset;
     }
 
+    public function setPrefix(string $prefix): void
+    {
+        $this->prefix = $prefix;
+    }
+
     public function generate(): IRow
     {
         $couponCode = null;
         while ($couponCode === null) {
-            $code = '';
+            $code = $this->prefix ?? '';
             foreach (range(1, $this->length) as $i) {
                 $code .= $this->charset[random_int(0, strlen($this->charset)-1)];
             }

@@ -59,5 +59,9 @@ admin:
 			expires_at:
 				label: "Datum expirace kupónu"
 				placeholder: např. 14.2.2016 14:21
+			prefix:
+				label: Prefix
+				placeholder: např. ABC-
+				description: Prefix který se použije při každém generovaném kódu.
 			submit: Vygenerovat
 			success: Kupóny byly vygenerovány.
