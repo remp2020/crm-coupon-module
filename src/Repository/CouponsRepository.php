@@ -58,14 +58,17 @@ class CouponsRepository extends Repository
         return $this->getTable()->order('created_at DESC');
     }
 
-    final public function search($text, $type)
+    final public function search($coupon, $type, $email)
     {
         $query = $this->all();
-        if ($text) {
-            $query->where(['coupon_code.code' => $text]);
+        if ($coupon) {
+            $query->where(['coupon_code.code LIKE ?' => '%' . $coupon . '%']);
+        }
+        if ($email) {
+            $query->where(['subscription.user.email LIKE ?' => '%' . $email . '%']);
         }
         if ($type) {
-            $query->where(['type' => $type]);
+            $query->where(['coupons.type' => $type]);
         }
         return $query;
     }

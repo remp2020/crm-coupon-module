@@ -15,7 +15,10 @@ use PhpOffice\PhpSpreadsheet\Writer\Csv;
 class CouponsAdminPresenter extends AdminPresenter
 {
     /** @persistent */
-    public $text;
+    public $coupon;
+
+    /** @persistent */
+    public $email;
 
     /** @persistent */
     public $type;
@@ -37,9 +40,9 @@ class CouponsAdminPresenter extends AdminPresenter
 
     public function renderDefault()
     {
-        $coupons = $this->couponsRepository->search($this->text, $this->type);
+        $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email);
         $filteredCount = (clone $coupons)->count('*');
-        $availableCount = (clone $coupons)->where('assigned_at IS NULL')->count('*');
+        $availableCount = (clone $coupons)->where('coupons.assigned_at IS NULL')->count('*');
 
         $vp = new VisualPaginator();
         $this->addComponent($vp, 'vp');
@@ -63,7 +66,8 @@ class CouponsAdminPresenter extends AdminPresenter
     {
         $form = $this->adminFilterFormFactory->create();
         $form->setDefaults([
-            'text' => $this->text,
+            'coupon' => $this->coupon,
+            'email' => $this->email,
             'type' => $this->type,
         ]);
 
@@ -96,7 +100,7 @@ class CouponsAdminPresenter extends AdminPresenter
 
     public function renderDownload()
     {
-        $coupons = $this->couponsRepository->search($this->text, $this->type)->fetchAll();
+        $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email)->fetchAll();
 
         $excel = $this->excelFactory->createExcel('Coupons Export');
         $excel->getActiveSheet()->setTitle('Export');

@@ -24,9 +24,12 @@ admin:
 
 	component:
 		filter_form:
-			text:
+			coupon:
 				label: Kupón
 				placeholder: "např. ABC123DE"
+			email:
+				label: E-mail
+				placeholder: "napr. test@test.sk"
 			type:
 				label: Typ
 				placeholder: "Vyberte typ kupónu"

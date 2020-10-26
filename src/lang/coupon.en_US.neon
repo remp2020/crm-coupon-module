@@ -24,9 +24,12 @@ admin:
 
 	component:
 		filter_form:
-			text:
+			coupon:
 				label: Coupon
 				placeholder: "e.g. ABC123DE"
+			email:
+				label: E-mail
+				placeholder: "e.g. test@test.sk"
 			type:
 				label: Type
 				placeholder: "Select type of coupon"
