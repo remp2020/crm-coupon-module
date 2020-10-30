@@ -7,7 +7,7 @@ use Crm\CouponModule\Repository\CouponsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
-use Crm\SubscriptionsModule\Subscription\SubscriptionType;
+use Crm\SubscriptionsModule\Subscription\SubscriptionTypeHelper;
 use Nette\Application\UI\Form;
 use Nette\Localization\ITranslator;
 use Nette\Utils\DateTime;
@@ -28,6 +28,8 @@ class GenerateFormFactory
 
     private $translator;
 
+    private $subscriptionTypeHelper;
+
     public $onSuccess;
 
     public function __construct(
@@ -36,7 +38,8 @@ class GenerateFormFactory
         SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
         CouponsRepository $couponsRepository,
         CouponGeneratorInterface $couponGenerator,
-        ITranslator $translator
+        ITranslator $translator,
+        SubscriptionTypeHelper $subscriptionTypeHelper
     ) {
         $this->subscriptionTypesRepository = $subscriptionTypesRepository;
         $this->subscriptionsRepository = $subscriptionsRepository;
@@ -44,6 +47,7 @@ class GenerateFormFactory
         $this->couponsRepository = $couponsRepository;
         $this->couponGenerator = $couponGenerator;
         $this->translator = $translator;
+        $this->subscriptionTypeHelper = $subscriptionTypeHelper;
     }
 
     public function create(): Form
@@ -57,7 +61,7 @@ class GenerateFormFactory
             ->setOption('description', 'coupon.admin.component.generate_form.type.description')
             ->setRequired('coupon.admin.component.generate_form.type.required');
 
-        $subscriptionTypePairs = SubscriptionType::getPairs($this->subscriptionTypesRepository->getAllActive());
+        $subscriptionTypePairs = $this->subscriptionTypeHelper->getPairs($this->subscriptionTypesRepository->getAllActive(), true);
 
         $subscriptionTypesElem = $form->addSelect('subscription_type_id', 'coupon.admin.component.generate_form.subscription_type_id.label', $subscriptionTypePairs)
             ->setAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_id.placeholder')
