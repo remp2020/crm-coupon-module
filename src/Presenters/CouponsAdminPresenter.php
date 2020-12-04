@@ -75,14 +75,9 @@ class CouponsAdminPresenter extends AdminPresenter
             $emptyDefaults = array_fill_keys(array_keys((array) $form->getComponents()), null);
             $this->redirect($this->action, $emptyDefaults);
         };
-        $form->onSuccess[] = [$this, 'filterFormSucceeded'];
+        $form->onSuccess[] = [$this, 'adminFilterSubmitted'];
 
         return $form;
-    }
-
-    public function filterFormSucceeded($form, $values)
-    {
-        $this->redirect($this->action, array_filter((array)$values));
     }
 
     public function createComponentGenerateForm()
