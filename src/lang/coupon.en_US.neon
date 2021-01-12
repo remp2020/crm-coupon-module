@@ -22,6 +22,11 @@ admin:
 	generate:
 		title: Coupon generator
 
+	filter_users:
+		coupon:
+			label: Coupon
+			placeholder: "e.g. ABC123DE"
+
 	component:
 		filter_form:
 			coupon:

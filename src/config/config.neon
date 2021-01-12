@@ -6,6 +6,7 @@ services:
 	couponsRepository: Crm\CouponModule\Repository\CouponsRepository
 	couponCodesRepository: Crm\CouponModule\Repository\CouponCodesRepository
 
+	- Crm\CouponModule\DataProvider\FilterUsersFormDataProvider
 	- Crm\CouponModule\Forms\AdminFilterFormFactory
 	- Crm\CouponModule\Forms\GenerateFormFactory
 

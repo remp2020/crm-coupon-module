@@ -6,6 +6,7 @@ use Crm\ApiModule\Api\ApiRoutersContainerInterface;
 use Crm\ApiModule\Router\ApiIdentifier;
 use Crm\ApiModule\Router\ApiRoute;
 use Crm\ApplicationModule\CrmModule;
+use Crm\ApplicationModule\DataProvider\DataProviderManager;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\CouponModule\Api\ActivateCouponApiHandler;
@@ -49,6 +50,14 @@ class CouponModule extends CrmModule
                 ActivateCouponApiHandler::class,
                 UserTokenAuthorization::class
             )
+        );
+    }
+
+    public function registerDataProviders(DataProviderManager $dataProviderManager)
+    {
+        $dataProviderManager->registerDataProvider(
+            'users.dataprovider.users_filter_form',
+            $this->getInstance(\Crm\CouponModule\DataProvider\FilterUsersFormDataProvider::class)
         );
     }
 }

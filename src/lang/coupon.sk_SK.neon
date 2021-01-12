@@ -22,6 +22,11 @@ admin:
 	generate:
 		title: Generátor kupónov
 
+	filter_users:
+		coupon:
+			label: Kupón
+			placeholder: "napr. ABC123DE"
+
 	component:
 		filter_form:
 			coupon:
