@@ -38,6 +38,9 @@ class CouponsAdminPresenter extends AdminPresenter
     /** @var ExcelFactory @inject */
     public $excelFactory;
 
+    /**
+     * @admin-access-level read
+     */
     public function renderDefault()
     {
         $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email);
@@ -58,6 +61,9 @@ class CouponsAdminPresenter extends AdminPresenter
         $this->template->coupons = $coupons;
     }
 
+    /**
+     * @admin-access-level write
+     */
     public function renderGenerate()
     {
     }
@@ -93,6 +99,9 @@ class CouponsAdminPresenter extends AdminPresenter
         return $form;
     }
 
+    /**
+     * @admin-access-level read
+     */
     public function renderDownload()
     {
         $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email)->fetchAll();
