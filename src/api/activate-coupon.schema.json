@@ -8,6 +8,9 @@
     "properties": {
         "code": {
             "type": "string"
+        },
+        "notifyUser": {
+            "type": "boolean"
         }
     }
 }

@@ -67,9 +67,10 @@ class ActivateCouponApiHandler extends ApiHandler
 
         $token = $data['token'];
         $userRow = $this->usersRepository->find($token->user_id);
+        $notifyUser = isset($json->notifyUser) && $json->notifyUser;
 
         try {
-            $this->couponsRepository->activate($userRow, $couponRow);
+            $this->couponsRepository->activate($userRow, $couponRow, $notifyUser);
         } catch (CouponAlreadyAssignedException $exception) {
             $response = new JsonResponse([
                 'status' => 'error',

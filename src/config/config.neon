@@ -10,6 +10,8 @@ services:
 	- Crm\CouponModule\Forms\AdminFilterFormFactory
 	- Crm\CouponModule\Forms\GenerateFormFactory
 
+	- Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria
+
 	couponGenerator:
 	    class: Crm\CouponModule\DefaultCouponGenerator
 

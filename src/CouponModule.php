@@ -5,11 +5,13 @@ namespace Crm\CouponModule;
 use Crm\ApiModule\Api\ApiRoutersContainerInterface;
 use Crm\ApiModule\Router\ApiIdentifier;
 use Crm\ApiModule\Router\ApiRoute;
+use Crm\ApplicationModule\Criteria\ScenariosCriteriaStorage;
 use Crm\ApplicationModule\CrmModule;
 use Crm\ApplicationModule\DataProvider\DataProviderManager;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\CouponModule\Api\ActivateCouponApiHandler;
+use Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria;
 use Crm\UsersModule\Auth\UserTokenAuthorization;
 
 class CouponModule extends CrmModule
@@ -59,5 +61,10 @@ class CouponModule extends CrmModule
             'users.dataprovider.users_filter_form',
             $this->getInstance(\Crm\CouponModule\DataProvider\FilterUsersFormDataProvider::class)
         );
+    }
+
+    public function registerScenariosCriteria(ScenariosCriteriaStorage $scenariosCriteriaStorage)
+    {
+        $scenariosCriteriaStorage->register('subscription', SubscriptionHasCouponCodeCriteria::KEY, $this->getInstance(SubscriptionHasCouponCodeCriteria::class));
     }
 }

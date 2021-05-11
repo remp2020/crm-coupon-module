@@ -87,10 +87,11 @@ class CouponsRepository extends Repository
     /**
      * @param IRow $user
      * @param IRow $coupon
+     * @param bool $sendEmail
      * @throws CouponAlreadyAssignedException
      * @throws CouponExpiredException
      */
-    final public function activate(IRow $user, IRow $coupon)
+    final public function activate(IRow $user, IRow $coupon, bool $sendEmail = false)
     {
         if ($coupon->assigned_at !== null) {
             throw new CouponAlreadyAssignedException('Coupon already assigned: {$coupon}');
@@ -109,7 +110,7 @@ class CouponsRepository extends Repository
             null,
             null,
             null,
-            false
+            $sendEmail
         );
 
         $this->update($coupon, [

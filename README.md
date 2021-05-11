@@ -46,6 +46,7 @@ Activate coupon specified by code for authenticated user.
 | Name | Value | Required | Description |
 | --- |---| --- | --- |
 | code | *String* | yes | The code of coupon to activate.|
+| notifyUser | *Boolean* | no | Flag indicating that user should be notified (email, push notification).|
 
 ##### *Example:*
 
@@ -55,7 +56,8 @@ curl -X POST \
   -H 'Authorization: Bearer XXX' \
   -H 'Content-Type: application/json' \
   -d '{
-    "code": "123456-789ABC-DEFG"
+    "code": "123456-789ABC-DEFG",
+    "notifyUser": true
   }'
 ```
 

@@ -27,6 +27,10 @@ admin:
 			label: Coupon
 			placeholder: "e.g. ABC123DE"
 
+	scenarios:
+		subscription_has_coupon_code:
+			label: The subscription has an associated coupon
+
 	component:
 		filter_form:
 			coupon:
