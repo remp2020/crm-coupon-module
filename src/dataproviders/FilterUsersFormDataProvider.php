@@ -38,7 +38,7 @@ class FilterUsersFormDataProvider implements FilterUsersFormDataProviderInterfac
         $formData = $params['formData'];
 
         $form->addText('coupon', $this->translator->translate('coupon.admin.filter_users.coupon.label'))
-            ->setAttribute('placeholder', $this->translator->translate('coupon.admin.filter_users.coupon.placeholder'));
+            ->setHtmlAttribute('placeholder', $this->translator->translate('coupon.admin.filter_users.coupon.placeholder'));
 
         $form->setDefaults([
             'coupon' => $this->getCoupon($formData)

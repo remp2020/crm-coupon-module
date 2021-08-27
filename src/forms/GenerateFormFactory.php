@@ -57,20 +57,20 @@ class GenerateFormFactory
         $form->setTranslator($this->translator);
 
         $form->addText('type', 'coupon.admin.component.generate_form.type.label')
-            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.type.placeholder')
+            ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.type.placeholder')
             ->setOption('description', 'coupon.admin.component.generate_form.type.description')
             ->setRequired('coupon.admin.component.generate_form.type.required');
 
         $subscriptionTypePairs = $this->subscriptionTypeHelper->getPairs($this->subscriptionTypesRepository->getAllActive(), true);
 
         $subscriptionTypesElem = $form->addSelect('subscription_type_id', 'coupon.admin.component.generate_form.subscription_type_id.label', $subscriptionTypePairs)
-            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_id.placeholder')
+            ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_id.placeholder')
             ->setOption('description', 'coupon.admin.component.generate_form.subscription_type_id.description')
             ->setRequired('coupon.admin.component.generate_form.subscription_type_id.required');
         $subscriptionTypesElem->getControlPrototype()->addAttributes(['class' => 'select2']);
 
         $form->addSelect('subscription_type_name_id', 'coupon.admin.component.generate_form.subscription_type_name_id.label', $this->subscriptionTypeNamesRepository->allActive()->fetchPairs('id', 'type'))
-            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_name_id.placeholder')
+            ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_name_id.placeholder')
             ->setOption('description', 'coupon.admin.component.generate_form.subscription_type_name_id.description')
             ->setRequired('coupon.admin.component.generate_form.subscription_type_name_id.required');
 
@@ -82,12 +82,12 @@ class GenerateFormFactory
             ->setOption('description', 'coupon.admin.component.generate_form.is_paid.description');
 
         $form->addText('prefix', 'coupon.admin.component.generate_form.prefix.label')
-            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.prefix.placeholder');
+            ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.prefix.placeholder');
 
         $form->addText('expires_at', 'coupon.admin.component.generate_form.expires_at.label')
-            ->setAttribute('placeholder', 'coupon.admin.component.generate_form.expires_at.placeholder')
-            ->setAttribute('class', 'flatpickr')
-            ->setAttribute('flatpickr_datetime', "1");
+            ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.expires_at.placeholder')
+            ->setHtmlAttribute('class', 'flatpickr')
+            ->setHtmlAttribute('flatpickr_datetime', "1");
 
         $form->addSubmit('send', 'coupon.admin.component.generate_form.submit')
             ->getControlPrototype()

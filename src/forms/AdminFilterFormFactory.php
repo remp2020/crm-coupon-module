@@ -30,11 +30,11 @@ class AdminFilterFormFactory
         $form->setTranslator($this->translator);
 
         $form->addText('coupon', $this->translator->translate('coupon.admin.component.filter_form.coupon.label'))
-            ->setAttribute('placeholder', $this->translator->translate('coupon.admin.component.filter_form.coupon.placeholder'))
-            ->setAttribute('autofocus');
+            ->setHtmlAttribute('placeholder', $this->translator->translate('coupon.admin.component.filter_form.coupon.placeholder'))
+            ->setHtmlAttribute('autofocus');
 
         $form->addText('email', $this->translator->translate('coupon.admin.component.filter_form.email.label'))
-            ->setAttribute('placeholder', $this->translator->translate('coupon.admin.component.filter_form.email.placeholder'));
+            ->setHtmlAttribute('placeholder', $this->translator->translate('coupon.admin.component.filter_form.email.placeholder'));
 
         $types = [];
         foreach ($this->couponsRepository->allTypes() as $couponType) {
