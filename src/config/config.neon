@@ -13,6 +13,6 @@ services:
 	- Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria
 
 	couponGenerator:
-		class: Crm\CouponModule\DefaultCouponGenerator
+		factory: Crm\CouponModule\DefaultCouponGenerator
 
 	activateCouponApiHandler: Crm\CouponModule\Api\ActivateCouponApiHandler
