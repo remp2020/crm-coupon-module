@@ -94,16 +94,16 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
         /** @var SubscriptionsRepository $subscriptionsRepository */
         $subscriptionsRepository = $this->inject(SubscriptionsRepository::class);
 
-        /** @var $subscriptionTypeNamesRepository SubscriptionTypeNamesRepository */
+        /** @var SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository */
         $subscriptionTypeNamesRepository = $this->getRepository(SubscriptionTypeNamesRepository::class);
         $subscriptionTypeNameRow = $subscriptionTypeNamesRepository->allActive()->fetch();
 
         if ($withCoupon) {
-            /** @var $couponCodesRepository CouponCodesRepository */
+            /** @var CouponCodesRepository $couponCodesRepository */
             $couponCodesRepository = $this->getRepository(CouponCodesRepository::class);
             $counponCodeRow = $couponCodesRepository->add('TEST-CODE03232939');
 
-            /** @var $couponsRepository CouponsRepository */
+            /** @var CouponsRepository $couponsRepository */
             $couponsRepository = $this->getRepository(CouponsRepository::class);
             $couponRow = $couponsRepository->add(
                 'testtype',
