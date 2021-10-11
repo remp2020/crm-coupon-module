@@ -7,9 +7,9 @@ use Crm\CouponModule\Repository\CouponsRepository;
 use Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria;
 use Crm\PaymentsModule\Tests\PaymentsTestCase;
 use Crm\SubscriptionsModule\Builder\SubscriptionTypeBuilder;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
+use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Seeders\SubscriptionTypeNamesSeeder;
 
 class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
