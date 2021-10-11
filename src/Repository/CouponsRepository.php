@@ -9,7 +9,7 @@ use Crm\CouponModule\Events\CouponActivatedEvent;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use DateTime;
 use League\Event\Emitter;
-use Nette\Caching\IStorage;
+use Nette\Caching\Storage;
 use Nette\Database\Context;
 use Nette\Database\Table\IRow;
 
@@ -25,7 +25,7 @@ class CouponsRepository extends Repository
         SubscriptionsRepository $subscriptionsRepository,
         Context $database,
         Emitter $emitter,
-        IStorage $cacheStorage = null
+        Storage $cacheStorage = null
     ) {
         parent::__construct($database, $cacheStorage);
         $this->subscriptionsRepository = $subscriptionsRepository;
