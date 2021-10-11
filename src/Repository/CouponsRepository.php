@@ -10,7 +10,7 @@ use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use DateTime;
 use League\Event\Emitter;
 use Nette\Caching\Storage;
-use Nette\Database\Context;
+use Nette\Database\Explorer;
 use Nette\Database\Table\IRow;
 
 class CouponsRepository extends Repository
@@ -23,7 +23,7 @@ class CouponsRepository extends Repository
 
     public function __construct(
         SubscriptionsRepository $subscriptionsRepository,
-        Context $database,
+        Explorer $database,
         Emitter $emitter,
         Storage $cacheStorage = null
     ) {
