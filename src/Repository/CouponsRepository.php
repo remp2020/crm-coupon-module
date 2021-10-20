@@ -11,7 +11,7 @@ use DateTime;
 use League\Event\Emitter;
 use Nette\Caching\Storage;
 use Nette\Database\Explorer;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 class CouponsRepository extends Repository
 {
@@ -47,7 +47,7 @@ class CouponsRepository extends Repository
         ]);
     }
 
-    final public function update(IRow &$row, $data)
+    final public function update(ActiveRow &$row, $data)
     {
         $data['updated_at'] = new \DateTime();
         return parent::update($row, $data);
@@ -85,13 +85,13 @@ class CouponsRepository extends Repository
     }
 
     /**
-     * @param IRow $user
-     * @param IRow $coupon
+     * @param ActiveRow $user
+     * @param ActiveRow $coupon
      * @param bool $sendEmail
      * @throws CouponAlreadyAssignedException
      * @throws CouponExpiredException
      */
-    final public function activate(IRow $user, IRow $coupon, bool $sendEmail = false)
+    final public function activate(ActiveRow $user, ActiveRow $coupon, bool $sendEmail = false)
     {
         if ($coupon->assigned_at !== null) {
             throw new CouponAlreadyAssignedException('Coupon already assigned: {$coupon}');

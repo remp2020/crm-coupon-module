@@ -2,11 +2,11 @@
 
 namespace Crm\CouponModule;
 
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 interface CouponGeneratorInterface
 {
-    public function generate(): IRow;
+    public function generate(): ActiveRow;
 
     public function setPrefix(string $prefix): void;
 }

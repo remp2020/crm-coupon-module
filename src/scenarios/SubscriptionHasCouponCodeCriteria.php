@@ -5,7 +5,7 @@ namespace Crm\CouponModule\Repository;
 use Crm\ApplicationModule\Criteria\ScenarioParams\BooleanParam;
 use Crm\ApplicationModule\Criteria\ScenariosCriteriaInterface;
 use Kdyby\Translation\Translator;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 use Nette\Database\Table\Selection;
 
 class SubscriptionHasCouponCodeCriteria implements ScenariosCriteriaInterface
@@ -29,7 +29,7 @@ class SubscriptionHasCouponCodeCriteria implements ScenariosCriteriaInterface
         ];
     }
 
-    public function addConditions(Selection $selection, array $paramValues, IRow $criterionItemRow): bool
+    public function addConditions(Selection $selection, array $paramValues, ActiveRow $criterionItemRow): bool
     {
         $hasCoupon = $paramValues[self::KEY]->selection;
 

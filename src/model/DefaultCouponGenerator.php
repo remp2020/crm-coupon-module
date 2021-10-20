@@ -3,7 +3,7 @@
 namespace Crm\CouponModule;
 
 use Crm\CouponModule\Repository\CouponCodesRepository;
-use Nette\Database\Table\IRow;
+use Nette\Database\Table\ActiveRow;
 
 class DefaultCouponGenerator implements CouponGeneratorInterface
 {
@@ -36,7 +36,7 @@ class DefaultCouponGenerator implements CouponGeneratorInterface
         $this->prefix = $prefix;
     }
 
-    public function generate(): IRow
+    public function generate(): ActiveRow
     {
         $couponCode = null;
         while ($couponCode === null) {
