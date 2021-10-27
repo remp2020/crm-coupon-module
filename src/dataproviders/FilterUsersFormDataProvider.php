@@ -6,14 +6,14 @@ use Crm\ApplicationModule\DataProvider\DataProviderException;
 use Crm\UsersModule\DataProvider\FilterUsersFormDataProviderInterface;
 use Nette\Application\UI\Form;
 use Nette\Database\Table\Selection;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 
 class FilterUsersFormDataProvider implements FilterUsersFormDataProviderInterface
 {
     private $translator;
 
     public function __construct(
-        ITranslator $translator
+        Translator $translator
     ) {
         $this->translator = $translator;
     }

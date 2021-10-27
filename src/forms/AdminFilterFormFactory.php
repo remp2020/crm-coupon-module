@@ -4,7 +4,7 @@ namespace Crm\CouponModule\Forms;
 
 use Crm\CouponModule\Repository\CouponsRepository;
 use Nette\Application\UI\Form;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class AdminFilterFormFactory
@@ -17,7 +17,7 @@ class AdminFilterFormFactory
 
     public function __construct(
         CouponsRepository $couponsRepository,
-        ITranslator $translator
+        Translator $translator
     ) {
         $this->couponsRepository = $couponsRepository;
         $this->translator = $translator;

@@ -9,7 +9,7 @@ use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
 use Crm\CouponModule\Repository\CouponsRepository;
 use Nette\Application\Responses\CallbackResponse;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 class CouponsAdminPresenter extends AdminPresenter
@@ -32,7 +32,7 @@ class CouponsAdminPresenter extends AdminPresenter
     /** @var CouponsRepository @inject */
     public $couponsRepository;
 
-    /** @var ITranslator @inject */
+    /** @var Translator @inject */
     public $translator;
 
     /** @var ExcelFactory @inject */

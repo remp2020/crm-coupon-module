@@ -9,7 +9,7 @@ use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Subscription\SubscriptionTypeHelper;
 use Nette\Application\UI\Form;
-use Nette\Localization\ITranslator;
+use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
 use Ramsey\Uuid\Uuid;
 use Tomaj\Form\Renderer\BootstrapRenderer;
@@ -38,7 +38,7 @@ class GenerateFormFactory
         SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
         CouponsRepository $couponsRepository,
         CouponGeneratorInterface $couponGenerator,
-        ITranslator $translator,
+        Translator $translator,
         SubscriptionTypeHelper $subscriptionTypeHelper
     ) {
         $this->subscriptionTypesRepository = $subscriptionTypesRepository;
