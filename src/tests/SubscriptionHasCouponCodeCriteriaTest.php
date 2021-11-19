@@ -16,20 +16,20 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
 {
     public function requiredRepositories(): array
     {
-        $repositories = parent::requiredRepositories();
-        $repositories[] = CouponCodesRepository::class;
-        $repositories[] = CouponsRepository::class;
-        $repositories[] = SubscriptionTypeNamesRepository::class;
-        $repositories[] = SubscriptionsRepository::class;
-        $repositories[] = SubscriptionTypesRepository::class;
-        return $repositories;
+        return array_merge(parent::requiredRepositories(), [
+            CouponCodesRepository::class,
+            CouponsRepository::class,
+            SubscriptionTypeNamesRepository::class,
+            SubscriptionsRepository::class,
+            SubscriptionTypesRepository::class,
+        ]);
     }
 
     public function requiredSeeders(): array
     {
-        $seeders = parent::requiredSeeders();
-        $seeders[] = SubscriptionTypeNamesSeeder::class;
-        return $seeders;
+        return array_merge(parent::requiredSeeders(), [
+            SubscriptionTypeNamesSeeder::class,
+        ]);
     }
 
     public function dataProviderForTestSubscriptionHasCouponCodeCriteria(): array
