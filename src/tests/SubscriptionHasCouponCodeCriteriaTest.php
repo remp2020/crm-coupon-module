@@ -71,9 +71,9 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
         $criteria->addConditions($subscriptionSelection, [SubscriptionHasCouponCodeCriteria::KEY => $values], $subscriptionRow);
 
         if ($expectedResult) {
-            $this->assertNotFalse($subscriptionSelection->fetch());
+            $this->assertNotNull($subscriptionSelection->fetch());
         } else {
-            $this->assertFalse($subscriptionSelection->fetch());
+            $this->assertNull($subscriptionSelection->fetch());
         }
     }
 
