@@ -106,7 +106,7 @@ class ActivateCouponApiHandler extends ApiHandler
         return $response;
     }
 
-    public function params()
+    public function params(): array
     {
         return [];
     }
