@@ -5,7 +5,7 @@ namespace Crm\CouponModule\Api;
 use Crm\ApiModule\Api\ApiHandler;
 use Crm\ApiModule\Api\JsonResponse;
 use Crm\ApiModule\Api\JsonValidationTrait;
-use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
+use Crm\ApiModule\Response\ApiResponseInterface;
 use Crm\CouponModule\CouponAlreadyAssignedException;
 use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Repository\CouponsRepository;
@@ -34,7 +34,7 @@ class ActivateCouponApiHandler extends ApiHandler
         $this->subscriptionsRepository = $subscriptionsRepository;
     }
 
-    public function handle(ApiAuthorizationInterface $authorization)
+    public function handle(array $params): ApiResponseInterface
     {
         $result = $this->validateInput(__DIR__ . '/activate-coupon.schema.json', $this->rawPayload());
         if ($result->hasErrorResponse()) {
