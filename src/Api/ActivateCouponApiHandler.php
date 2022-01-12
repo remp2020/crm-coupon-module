@@ -41,6 +41,7 @@ class ActivateCouponApiHandler extends ApiHandler
             return $result->getErrorResponse();
         }
 
+        $authorization = $this->getAuthorization();
         $data = $authorization->getAuthorizedData();
         if (!isset($data['token'])) {
             $response = new JsonResponse([
