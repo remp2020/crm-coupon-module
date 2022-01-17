@@ -70,7 +70,8 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
             ->getMock();
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => 'test']));
-        $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
+        $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
+        $response = $this->activateCouponApiHandler->handle([]); // TODO: fix params
 
         $payload = $response->getPayload();
 
@@ -89,7 +90,8 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $this->couponsRepository->activate($userRow, $validCouponRow);
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
-        $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
+        $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
+        $response = $this->activateCouponApiHandler->handle([]); // TODO: fix params
 
         $payload = $response->getPayload();
 
@@ -106,7 +108,8 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
-        $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
+        $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
+        $response = $this->activateCouponApiHandler->handle([]); // TODO: fix params
         $payload = $response->getPayload();
 
         $this->assertEquals(Response::S200_OK, $response->getHttpCode());
@@ -121,7 +124,8 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $expiredCouponCodeRow->code]));
-        $response = $this->activateCouponApiHandler->handle($userTokenAuthorization);
+        $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
+        $response = $this->activateCouponApiHandler->handle([]); // TODO: fix params
 
         $payload = $response->getPayload();
 
