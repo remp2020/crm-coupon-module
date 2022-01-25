@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\CouponsModule\Tests;
+namespace Crm\CouponModule\Tests;
 
 use Crm\CouponModule\Repository\CouponCodesRepository;
 use Crm\CouponModule\Repository\CouponsRepository;
