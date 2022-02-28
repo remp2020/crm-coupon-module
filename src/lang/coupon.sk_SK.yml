@@ -1,0 +1,79 @@
+menu:
+    coupons: Kupóny
+    generator: Generátor kupónov
+
+admin:
+    default:
+        title: Kupóny
+        total: celkovo
+        unused: voľných
+        fields:
+            coupon: Kupón
+            type: Typ
+            user: Používateľ
+            subscription_type: Typ predplatného
+            subscription_type_name: Typ vytvoreného predplatného
+            created_at: Vytvorený
+            assigned_at: Priradený
+            expires_at: Expirácia
+        export:
+            csv: Export CSV
+
+    generate:
+        title: Generátor kupónov
+
+    filter_users:
+        coupon:
+            label: Kupón
+            placeholder: "napr. ABC123DE"
+
+    scenarios:
+        subscription_has_coupon_code:
+            label: Predplatné ma priradený kupón
+
+    component:
+        filter_form:
+            coupon:
+                label: Kupón
+                placeholder: "napr. ABC123DE"
+            email:
+                label: E-mail
+                placeholder: "napr. test@test.sk"
+            type:
+                label: Typ
+                placeholder: "Vyberte typ kupónu"
+            submit: Filtruj
+            cancel: Zruš filter
+
+        generate_form:
+            type:
+                label: Typ kupónu
+                placeholder: "napr. summer promo"
+                description: "Typ kupónu by mal rozlišovať rôzne akcie v prípade potreby viacerých generovaní kupónov."
+                required: Typ kupónu je povinný
+            subscription_type_id:
+                label: Typ predplatného
+                placeholder: "napr. web/mesiac"
+                description: "Typ predplatného určuje aké predplatné používateľ dostane po aktivácií kupónu. Predplatné sa aktivuje štandardným spôsobom podľa nastavenia typu predplatného."
+                required: Typ predplatného je povinný
+            subscription_type_name_id:
+                label: Typ vytvoreného predplatného
+                placeholder: "napr. regular"
+                description: "Typ vytvoreného predplatného sa používa na spustenie rôznych (notifikačných) scenárov."
+                required: Typ vytvoreného predplatného je povinný
+            count:
+                label: Počet kupónov
+                placeholder: napr. 10
+                required: "Počet kupónov, ktoré sa majú vygenerovať, je povinný"
+            is_paid:
+                label: "Platený"
+                description: "Platený sa používa na určenie či je predplatné platené alebo nie (naprieč celým CRM)."
+            expires_at:
+                label: "Dátum expirácie kupónu"
+                placeholder: napr. 14.2.2016 14:21
+            prefix:
+                label: Prefix
+                placeholder: napr. ABC-
+                description: Prefix ktorý sa použije pri každom vygenerovanom kóde.
+            submit: Vygenerovať
+            success: Kupóny boli vygenerované.
