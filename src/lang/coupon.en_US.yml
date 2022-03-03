@@ -54,7 +54,7 @@ admin:
             subscription_type_id:
                 label: Subscription type
                 placeholder: "e.g. web/monthly"
-                description: "Subscription type determines what kind of subscription users get when they activate the coupon. Subscription is activated with default settings based on the subscription type configuration"
+                description: "Subscription type determines what kind of subscription users get when they activate the coupon. Subscription is activated with default settings based on the subscription type configuration."
                 required: Subscription type is required
             subscription_type_name_id:
                 label: Type of created subscription
