@@ -1,5 +1,7 @@
 # CRM Coupon Module
 
+[![Translation status @ Weblate](https://hosted.weblate.org/widgets/remp-crm/-/coupon-module/svg-badge.svg)](https://hosted.weblate.org/projects/remp-crm/coupon-module/)
+
 ## API documentation
 
 All examples use `http://crm.press` as a base domain. Please change the host to the one you use
