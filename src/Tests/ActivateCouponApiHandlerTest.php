@@ -75,7 +75,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $payload = $response->getPayload();
 
-        $this->assertEquals(Response::S404_NOT_FOUND, $response->getHttpCode());
+        $this->assertEquals(Response::S404_NOT_FOUND, $response->getCode());
         $this->assertEquals('error', $payload['status']);
         $this->assertEquals('coupon_doesnt_exist', $payload['code']);
     }
@@ -95,7 +95,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $payload = $response->getPayload();
 
-        $this->assertEquals(Response::S400_BAD_REQUEST, $response->getHttpCode());
+        $this->assertEquals(Response::S400_BAD_REQUEST, $response->getCode());
         $this->assertEquals('error', $payload['status']);
         $this->assertEquals('coupon_already_used', $payload['code']);
     }
@@ -112,7 +112,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $response = $this->activateCouponApiHandler->handle([]); // TODO: fix params
         $payload = $response->getPayload();
 
-        $this->assertEquals(Response::S200_OK, $response->getHttpCode());
+        $this->assertEquals(Response::S200_OK, $response->getCode());
         $this->assertEquals($validCouponRow->id, $payload['coupon_id']);
     }
 
@@ -129,7 +129,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $payload = $response->getPayload();
 
-        $this->assertEquals(Response::S410_GONE, $response->getHttpCode());
+        $this->assertEquals(Response::S410_GONE, $response->getCode());
         $this->assertEquals('error', $payload['status']);
         $this->assertEquals('coupon_expired', $payload['code']);
     }
