@@ -44,7 +44,7 @@ class AdminFilterFormFactory
             ->setPrompt($this->translator->translate('coupon.admin.component.filter_form.type.placeholder'));
         $typeElem->getControlPrototype()->addAttributes(['class' => 'select2']);
 
-        $form->addSubmit('send', $this->translator->translate('coupon.admin.admin_filter_form.submit'))
+        $form->addSubmit('send', $this->translator->translate('coupon.admin.component.filter_form.submit'))
             ->getControlPrototype()
             ->setName('button')
             ->setHtml('<i class="fa fa-filter"></i> ' . $this->translator->translate('coupon.admin.component.filter_form.submit'));
