@@ -3,24 +3,29 @@
 namespace Crm\CouponModule\Forms;
 
 use Crm\CouponModule\Repository\CouponsRepository;
+use Nette\Application\LinkGenerator;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Tomaj\Form\Renderer\BootstrapInlineRenderer;
 
 class AdminFilterFormFactory
 {
-    private $couponsRepository;
+    private CouponsRepository $couponsRepository;
 
-    private $translator;
+    private Translator $translator;
+
+    private LinkGenerator $linkGenerator;
 
     public $onCancel;
 
     public function __construct(
         CouponsRepository $couponsRepository,
-        Translator $translator
+        Translator $translator,
+        LinkGenerator $linkGenerator
     ) {
         $this->couponsRepository = $couponsRepository;
         $this->translator = $translator;
+        $this->linkGenerator = $linkGenerator;
     }
 
     public function create(): Form
@@ -37,12 +42,19 @@ class AdminFilterFormFactory
             ->setHtmlAttribute('placeholder', $this->translator->translate('coupon.admin.component.filter_form.email.placeholder'));
 
         $types = [];
-        foreach ($this->couponsRepository->allTypes() as $couponType) {
-            $types[$couponType->type] = sprintf("%s <small class='text-muted'>(%dx)</small>", $couponType->type, $couponType->count);
+        foreach ($this->getAvailableCouponTypes() as $couponType) {
+            $types[$couponType['key']] = $couponType['value'];
         }
         $typeElem = $form->addSelect('type', '', $types)
             ->setPrompt($this->translator->translate('coupon.admin.component.filter_form.type.placeholder'));
-        $typeElem->getControlPrototype()->addAttributes(['class' => 'select2']);
+        $typeElem->getControlPrototype()->addAttributes([
+            'class' => 'select2',
+        ]);
+        if (count($types) >= 500) { // too much for select2 initialization, use AJAX
+            $typeElem->getControlPrototype()->addAttributes([
+                'data-ajax-url' => $this->linkGenerator->link('Coupon:CouponsAdmin:typesJson')
+            ]);
+        }
 
         $form->addSubmit('send', $this->translator->translate('coupon.admin.component.filter_form.submit'))
             ->getControlPrototype()
@@ -54,5 +66,24 @@ class AdminFilterFormFactory
         };
 
         return $form;
+    }
+
+    public function getAvailableCouponTypes(?string $searchType = null)
+    {
+        $matchedTypes = $this->couponsRepository->allTypes();
+        if ($searchType) {
+            $matchedTypes
+                ->where('type LIKE ?', "{$searchType}%")
+                ->limit(50);
+        }
+
+        $types = [];
+        foreach ($matchedTypes as $couponType) {
+            $types[] = [
+                'key' => $couponType->type,
+                'value' => "{$couponType->type} <small class='text-muted'>({$couponType->count}x)</small>",
+            ];
+        }
+        return $types;
     }
 }

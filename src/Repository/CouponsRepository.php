@@ -81,7 +81,9 @@ class CouponsRepository extends Repository
 
     final public function allTypes()
     {
-        return $this->getTable()->group('type')->select('type, count(*) AS count')->fetchAll();
+        return $this->getTable()
+            ->select('type, count(*) AS count')
+            ->group('type');
     }
 
     /**

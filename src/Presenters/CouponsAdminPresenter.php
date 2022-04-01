@@ -8,6 +8,7 @@ use Crm\ApplicationModule\ExcelFactory;
 use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
 use Crm\CouponModule\Repository\CouponsRepository;
+use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
 use Nette\Localization\Translator;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
@@ -84,6 +85,20 @@ class CouponsAdminPresenter extends AdminPresenter
         $form->onSuccess[] = [$this, 'adminFilterSubmitted'];
 
         return $form;
+    }
+
+    /**
+     * @admin-access-level read
+     */
+    public function actionTypesJson()
+    {
+        $term = $this->request->getParameter('term');
+        if (!$term) {
+            throw new BadRequestException('missing parameter term');
+        }
+
+        $types = $this->adminFilterFormFactory->getAvailableCouponTypes($term);
+        $this->sendJson($types);
     }
 
     public function createComponentGenerateForm()
