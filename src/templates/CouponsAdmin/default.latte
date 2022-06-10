@@ -33,6 +33,7 @@
           <th>{_coupon.admin.default.fields.created_at}</th>
           <th>{_coupon.admin.default.fields.expires_at}</th>
           <th>{_coupon.admin.default.fields.assigned_at}</th>
+          <th>{_coupon.admin.default.actions}</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +59,9 @@
           </td>
           <td>
             <span class="text-muted">{$coupon->assigned_at|userDate}</span>
+          </td>
+          <td>
+            <a n:if="!$coupon->subscription_id" n:href="edit $coupon->id" class="btn btn-sm btn-primary" title="{_coupon.admin.default.edit}"><i class="fa fa-edit"></i> </a>
           </td>
         </tr>
       </tbody>

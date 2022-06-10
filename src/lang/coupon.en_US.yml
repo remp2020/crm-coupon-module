@@ -18,6 +18,17 @@ admin:
             expires_at: Expiration
         export:
             csv: Export CSV
+        actions: Actions
+        edit: edit
+    edit_form:
+        title: Edit coupon
+        success: "Coupon: %coupon% was successfully edited"
+        cant_edit: "Coupon %coupon% cannot be edited because it has already been used"
+        back: Back to coupons
+        subscription_type_name_id:
+            label: "Type of created subscription:"
+        expires_at:
+            label: "Coupon expiration date:"
 
     generate:
         title: Coupon generator

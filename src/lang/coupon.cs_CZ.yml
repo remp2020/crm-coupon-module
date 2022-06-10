@@ -18,6 +18,17 @@ admin:
             expires_at: Expirace
         export:
             csv: Export CSV
+        actions: Akce
+        edit: Upravit
+    edit_form:
+        title: Upravit kupón
+        success: "Kupon %coupon% byl úspěšně upraven"
+        cant_edit: "Kupón %coupon% nelze upravit, protože byl již použit"
+        back: Zpět na seznam kuponů
+        subscription_type_name_id:
+            label: "Typ vytvořeného předplatného:"
+        expires_at:
+            label: "Datum expirace kupónu:"
 
     generate:
         title: Generátor kupónů

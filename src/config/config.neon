@@ -9,6 +9,7 @@ services:
 	- Crm\CouponModule\DataProvider\FilterUsersFormDataProvider
 	- Crm\CouponModule\Forms\AdminFilterFormFactory
 	- Crm\CouponModule\Forms\GenerateFormFactory
+	- Crm\CouponModule\Forms\EditCouponFormFactory
 
 	- Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria
 

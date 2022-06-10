@@ -6,6 +6,7 @@ use Crm\AdminModule\Presenters\AdminPresenter;
 use Crm\ApplicationModule\Components\VisualPaginator;
 use Crm\ApplicationModule\ExcelFactory;
 use Crm\CouponModule\Forms\AdminFilterFormFactory;
+use Crm\CouponModule\Forms\EditCouponFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
 use Crm\CouponModule\Repository\CouponsRepository;
 use Nette\Application\BadRequestException;
@@ -29,6 +30,9 @@ class CouponsAdminPresenter extends AdminPresenter
 
     /** @var GenerateFormFactory @inject */
     public $generateFormFactory;
+
+    /** @var EditCouponFormFactory @inject */
+    public $editCouponFormFactory;
 
     /** @var CouponsRepository @inject */
     public $couponsRepository;
@@ -67,6 +71,37 @@ class CouponsAdminPresenter extends AdminPresenter
      */
     public function renderGenerate()
     {
+    }
+
+    public function renderEdit(int $couponId)
+    {
+        $coupon = $this->couponsRepository->find($couponId);
+        if ($coupon->subscription_id) {
+            $this->flashMessage($this->translator->translate(
+                'coupon.admin.edit_form.cant_edit',
+                [
+                    'coupon' => $coupon->coupon_code->code
+                ]
+            ), 'info');
+            $this->redirect('default');
+        }
+        $this->template->coupon = $coupon;
+    }
+
+    public function createComponentCouponEditForm()
+    {
+        $this->editCouponFormFactory->onSuccess = function ($form, $values) {
+            $coupon = $this->couponsRepository->find($values['coupon_id']);
+            $this->flashMessage($this->translator->translate(
+                'coupon.admin.edit_form.success',
+                [
+                    'coupon' => $coupon->coupon_code->code
+                ]
+            ));
+            $this->redirect('default');
+        };
+
+        return $this->editCouponFormFactory->create($this->getParameter('couponId'));
     }
 
     public function createComponentFilterForm()
