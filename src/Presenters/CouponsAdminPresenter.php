@@ -3,7 +3,7 @@
 namespace Crm\CouponModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
-use Crm\ApplicationModule\Components\VisualPaginator;
+use Crm\ApplicationModule\Components\PreviousNextPaginator;
 use Crm\ApplicationModule\ExcelFactory;
 use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
@@ -44,20 +44,15 @@ class CouponsAdminPresenter extends AdminPresenter
     public function renderDefault()
     {
         $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email);
-        $filteredCount = (clone $coupons)->count('*');
-        $availableCount = (clone $coupons)->where('coupons.assigned_at IS NULL')->count('*');
 
-        $vp = new VisualPaginator();
-        $this->addComponent($vp, 'vp');
-        $paginator = $vp->getPaginator();
-        $paginator->setItemCount($filteredCount);
+        $pnp = new PreviousNextPaginator();
+        $this->addComponent($pnp, 'paginator');
+        $paginator = $pnp->getPaginator();
         $paginator->setItemsPerPage($this->onPage);
 
-        $coupons->limit($paginator->getLength(), $paginator->getOffset());
+        $coupons = $coupons->limit($paginator->getLength(), $paginator->getOffset())->fetchAll();
+        $pnp->setActualItemCount(count($coupons));
 
-        $this->template->vp = $vp;
-        $this->template->filteredCount = $filteredCount;
-        $this->template->availableCount = $availableCount;
         $this->template->coupons = $coupons;
     }
 
