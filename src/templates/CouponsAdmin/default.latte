@@ -6,9 +6,6 @@
   <div class="col-md-12">
     <h1>
       {_coupon.admin.default.title}
-      <small>
-        {_coupon.admin.default.total} {$coupons->count('*')} / {_coupon.admin.default.unused} {$availableCount}
-      </small>
     </h1>
     <hr>
   </div>
@@ -67,7 +64,7 @@
       </tbody>
     </table>
 
-    {control vp}
+    {control paginator}
   </div>
 </div>
 
