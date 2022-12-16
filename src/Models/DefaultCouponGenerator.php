@@ -21,7 +21,7 @@ class DefaultCouponGenerator implements CouponGeneratorInterface
         $this->couponCodesRepository = $couponCodesRepository;
     }
 
-    public function setLength($length)
+    public function setLength(int $length): void
     {
         $this->length = $length;
     }

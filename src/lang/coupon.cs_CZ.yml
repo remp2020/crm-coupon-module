@@ -86,5 +86,8 @@ admin:
                 label: Prefix
                 placeholder: např. ABC-
                 description: Prefix který se použije při každém generovaném kódu.
+            length:
+                label: Počet znaků
+                validation: Počet znaků musí být v rozsahu 2 - 100 znaků
             submit: Vygenerovat
             success: Kupóny byly vygenerovány.

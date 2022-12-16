@@ -86,5 +86,8 @@ admin:
                 label: Prefix
                 placeholder: e.g. ABC-
                 description: Prefix to be used for each generated code.
+            length:
+                label: Number of characters
+                validation: The number of characters has to be in the range of 2 - 100 characters
             submit: Generate
             success: Coupons were generated.

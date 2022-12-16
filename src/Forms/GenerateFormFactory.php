@@ -6,7 +6,6 @@ use Crm\CouponModule\CouponGeneratorInterface;
 use Crm\CouponModule\Repository\CouponsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Subscription\SubscriptionTypeHelper;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
@@ -16,9 +15,10 @@ use Tomaj\Form\Renderer\BootstrapRenderer;
 
 class GenerateFormFactory
 {
-    private $subscriptionTypesRepository;
+    private const MIN_COUPON_LENGTH = 2;
+    private const MAX_COUPON_LENGTH = 100;
 
-    private $subscriptionsRepository;
+    private $subscriptionTypesRepository;
 
     private $subscriptionTypeNamesRepository;
 
@@ -33,7 +33,6 @@ class GenerateFormFactory
     public $onSuccess;
 
     public function __construct(
-        SubscriptionsRepository $subscriptionsRepository,
         SubscriptionTypesRepository $subscriptionTypesRepository,
         SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
         CouponsRepository $couponsRepository,
@@ -42,7 +41,6 @@ class GenerateFormFactory
         SubscriptionTypeHelper $subscriptionTypeHelper
     ) {
         $this->subscriptionTypesRepository = $subscriptionTypesRepository;
-        $this->subscriptionsRepository = $subscriptionsRepository;
         $this->subscriptionTypeNamesRepository = $subscriptionTypeNamesRepository;
         $this->couponsRepository = $couponsRepository;
         $this->couponGenerator = $couponGenerator;
@@ -84,6 +82,10 @@ class GenerateFormFactory
         $form->addText('prefix', 'coupon.admin.component.generate_form.prefix.label')
             ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.prefix.placeholder');
 
+        $form->addInteger('length', 'coupon.admin.component.generate_form.length.label')
+            ->addRule(Form::MIN, 'coupon.admin.component.generate_form.length.validation', self::MIN_COUPON_LENGTH)
+            ->addRule(Form::MAX, 'coupon.admin.component.generate_form.length.validation', self::MAX_COUPON_LENGTH);
+
         $form->addText('expires_at', 'coupon.admin.component.generate_form.expires_at.label')
             ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.expires_at.placeholder')
             ->setHtmlAttribute('class', 'flatpickr')
@@ -100,6 +102,11 @@ class GenerateFormFactory
 
     public function formSucceeded($form, $values)
     {
+        if ($values['prefix'] && $values['length'] && (strlen($values['prefix']) + $values['length'] > self::MAX_COUPON_LENGTH)) {
+            $form['length']->addError($this->translator->translate('coupon.admin.component.generate_form.length.validation'));
+            return;
+        }
+
         $batchUuid = Uuid::uuid4();
         foreach (range(1, $values->count) as $_) {
             $expiresAt = null;
@@ -109,6 +116,10 @@ class GenerateFormFactory
 
             if ($values['prefix']) {
                 $this->couponGenerator->setPrefix($values['prefix']);
+            }
+
+            if ($values['length']) {
+                $this->couponGenerator->setLength($values['length']);
             }
 
             $couponCode = $this->couponGenerator->generate();
