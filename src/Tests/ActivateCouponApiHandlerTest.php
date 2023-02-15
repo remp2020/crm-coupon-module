@@ -69,7 +69,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => 'test']));
         $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
-        $response = $this->runApi($this->activateCouponApiHandler);
+        $response = $this->runJsonApi($this->activateCouponApiHandler);
 
         $payload = $response->getPayload();
 
@@ -89,7 +89,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
         $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
-        $response = $this->runApi($this->activateCouponApiHandler);
+        $response = $this->runJsonApi($this->activateCouponApiHandler);
 
         $payload = $response->getPayload();
 
@@ -107,7 +107,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $validCouponCodeRow->code]));
         $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
-        $response = $this->runApi($this->activateCouponApiHandler);
+        $response = $this->runJsonApi($this->activateCouponApiHandler);
         $payload = $response->getPayload();
 
         $this->assertEquals(Response::S200_OK, $response->getCode());
@@ -123,7 +123,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
 
         $this->activateCouponApiHandler->setRawPayload(Json::encode(['code' => $expiredCouponCodeRow->code]));
         $this->activateCouponApiHandler->setAuthorization($userTokenAuthorization);
-        $response = $this->runApi($this->activateCouponApiHandler);
+        $response = $this->runJsonApi($this->activateCouponApiHandler);
 
         $payload = $response->getPayload();
 
