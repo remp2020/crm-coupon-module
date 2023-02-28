@@ -53,6 +53,10 @@ admin:
             type:
                 label: Type
                 placeholder: "Select type of coupon"
+            created_at_from:
+                label: "Created from"
+            created_at_to:
+                label: "Created to"
             submit: Filter
             cancel: Cancel filter
 

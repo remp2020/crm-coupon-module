@@ -3,6 +3,7 @@
 namespace Crm\CouponModule\Repository;
 
 use Crm\ApplicationModule\Repository;
+use Crm\ApplicationModule\Selection;
 use Crm\CouponModule\CouponAlreadyAssignedException;
 use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Events\CouponActivatedEvent;
@@ -58,8 +59,13 @@ class CouponsRepository extends Repository
         return $this->getTable()->order('id DESC');
     }
 
-    final public function search($coupon, $type, $email)
-    {
+    final public function search(
+        string $coupon = null,
+        string $type = null,
+        string $email = null,
+        DateTime $createdAtFrom = null,
+        DateTime $createdAtTo = null
+    ): Selection {
         $query = $this->all();
         if ($coupon) {
             $query->where(['coupon_code.code LIKE ?' => '%' . $coupon . '%']);
@@ -69,6 +75,12 @@ class CouponsRepository extends Repository
         }
         if ($type) {
             $query->where(['coupons.type' => $type]);
+        }
+        if ($createdAtFrom) {
+            $query->where('coupons.created_at >= ?', $createdAtFrom);
+        }
+        if ($createdAtTo) {
+            $query->where('coupons.created_at <= ?', $createdAtTo);
         }
         return $query;
     }

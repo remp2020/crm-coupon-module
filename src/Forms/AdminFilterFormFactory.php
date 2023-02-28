@@ -56,6 +56,14 @@ class AdminFilterFormFactory
             ]);
         }
 
+        $form->addText('created_at_from', 'coupon.admin.component.filter_form.created_at_from.label')
+            ->setHtmlAttribute('class', 'flatpickr')
+            ->setHtmlAttribute('flatpickr_datetime_seconds', "1");
+
+        $form->addText('created_at_to', 'coupon.admin.component.filter_form.created_at_to.label')
+            ->setHtmlAttribute('class', 'flatpickr')
+            ->setHtmlAttribute('flatpickr_datetime_seconds', "1");
+
         $form->addSubmit('send', $this->translator->translate('coupon.admin.component.filter_form.submit'))
             ->getControlPrototype()
             ->setName('button')

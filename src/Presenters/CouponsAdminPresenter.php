@@ -9,6 +9,7 @@ use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\EditCouponFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
 use Crm\CouponModule\Repository\CouponsRepository;
+use DateTime;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
 use Nette\Localization\Translator;
@@ -24,6 +25,12 @@ class CouponsAdminPresenter extends AdminPresenter
 
     /** @persistent */
     public $type;
+
+    /** @persistent */
+    public $created_at_from;
+
+    /** @persistent  */
+    public $created_at_to;
 
     /** @var AdminFilterFormFactory @inject */
     public $adminFilterFormFactory;
@@ -48,7 +55,13 @@ class CouponsAdminPresenter extends AdminPresenter
      */
     public function renderDefault()
     {
-        $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email);
+        $coupons = $this->couponsRepository->search(
+            $this->coupon,
+            $this->type,
+            $this->email,
+            $this->created_at_from ? new DateTime($this->created_at_from) : null,
+            $this->created_at_to ? new DateTime($this->created_at_to) : null
+        );
 
         $pnp = new PreviousNextPaginator();
         $this->addComponent($pnp, 'paginator');
@@ -106,6 +119,8 @@ class CouponsAdminPresenter extends AdminPresenter
             'coupon' => $this->coupon,
             'email' => $this->email,
             'type' => $this->type,
+            'created_at_from' => $this->created_at_from,
+            'created_at_to' => $this->created_at_to,
         ]);
 
         $this->adminFilterFormFactory->onCancel = function () use ($form) {
@@ -149,7 +164,13 @@ class CouponsAdminPresenter extends AdminPresenter
      */
     public function renderDownload()
     {
-        $coupons = $this->couponsRepository->search($this->coupon, $this->type, $this->email)->fetchAll();
+        $coupons = $this->couponsRepository->search(
+            $this->coupon,
+            $this->type,
+            $this->email,
+            $this->created_at_from ? new DateTime($this->created_at_from) : null,
+            $this->created_at_to ? new DateTime($this->created_at_to) : null
+        )->fetchAll();
 
         $excel = $this->excelFactory->createExcel('Coupons Export');
         $excel->getActiveSheet()->setTitle('Export');

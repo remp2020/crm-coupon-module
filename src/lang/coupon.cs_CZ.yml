@@ -53,6 +53,10 @@ admin:
             type:
                 label: Typ
                 placeholder: "Vyberte typ kupónu"
+            created_at_from:
+                label: "Vytvořen od"
+            created_at_to:
+                label: "Vytvořen do"
             submit: Filtruj
             cancel: Zruš filtr
 
