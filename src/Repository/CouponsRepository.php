@@ -55,7 +55,7 @@ class CouponsRepository extends Repository
 
     final public function all()
     {
-        return $this->getTable()->order('created_at DESC');
+        return $this->getTable()->order('id DESC');
     }
 
     final public function search($coupon, $type, $email)
