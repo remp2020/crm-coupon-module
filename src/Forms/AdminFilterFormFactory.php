@@ -88,7 +88,7 @@ class AdminFilterFormFactory
         $types = [];
         foreach ($matchedTypes as $couponType) {
             $types[] = [
-                'key' => $couponType->type,
+                'key' => mb_strtolower($couponType->type),
                 'value' => "{$couponType->type} <small class='text-muted'>({$couponType->count}x)</small>",
             ];
         }

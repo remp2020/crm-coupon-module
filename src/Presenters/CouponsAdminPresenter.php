@@ -118,7 +118,7 @@ class CouponsAdminPresenter extends AdminPresenter
         $form->setDefaults([
             'coupon' => $this->coupon,
             'email' => $this->email,
-            'type' => $this->type,
+            'type' => $this->type ? mb_strtolower($this->type) : null,
             'created_at_from' => $this->created_at_from,
             'created_at_to' => $this->created_at_to,
         ]);
