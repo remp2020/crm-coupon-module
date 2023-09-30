@@ -12,7 +12,6 @@ use Crm\CouponModule\Repository\CouponsRepository;
 use DateTime;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
-use Nette\Localization\Translator;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 class CouponsAdminPresenter extends AdminPresenter
@@ -43,9 +42,6 @@ class CouponsAdminPresenter extends AdminPresenter
 
     /** @var CouponsRepository @inject */
     public $couponsRepository;
-
-    /** @var Translator @inject */
-    public $translator;
 
     /** @var ExcelFactory @inject */
     public $excelFactory;
