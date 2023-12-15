@@ -11,6 +11,7 @@ use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Seeders\SubscriptionTypeNamesSeeder;
+use PHPUnit\Framework\Attributes\DataProvider;
 
 class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
 {
@@ -32,7 +33,7 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
         ]);
     }
 
-    public function dataProviderForTestSubscriptionHasCouponCodeCriteria(): array
+    public static function dataProviderForTestSubscriptionHasCouponCodeCriteria(): array
     {
         return [
             [
@@ -58,9 +59,7 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
         ];
     }
 
-    /**
-     * @dataProvider dataProviderForTestSubscriptionHasCouponCodeCriteria
-     */
+    #[DataProvider('dataProviderForTestSubscriptionHasCouponCodeCriteria')]
     public function testSubscriptionHasCouponCodeCriteria($hasCode, $shouldHaveCode, $expectedResult)
     {
         [$subscriptionSelection, $subscriptionRow] = $this->prepareData($hasCode);
