@@ -10,41 +10,43 @@ use Crm\CouponModule\Forms\EditCouponFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
 use Crm\CouponModule\Repository\CouponsRepository;
 use DateTime;
+use Nette\Application\Attributes\Persistent;
 use Nette\Application\BadRequestException;
 use Nette\Application\Responses\CallbackResponse;
+use Nette\DI\Attributes\Inject;
 use PhpOffice\PhpSpreadsheet\Writer\Csv;
 
 class CouponsAdminPresenter extends AdminPresenter
 {
-    /** @persistent */
+    #[Persistent]
     public $coupon;
 
-    /** @persistent */
+    #[Persistent]
     public $email;
 
-    /** @persistent */
+    #[Persistent]
     public $type;
 
-    /** @persistent */
+    #[Persistent]
     public $created_at_from;
 
-    /** @persistent  */
+    #[Persistent]
     public $created_at_to;
 
-    /** @var AdminFilterFormFactory @inject */
-    public $adminFilterFormFactory;
+    #[Inject]
+    public AdminFilterFormFactory $adminFilterFormFactory;
 
-    /** @var GenerateFormFactory @inject */
-    public $generateFormFactory;
+    #[Inject]
+    public GenerateFormFactory $generateFormFactory;
 
-    /** @var EditCouponFormFactory @inject */
-    public $editCouponFormFactory;
+    #[Inject]
+    public EditCouponFormFactory $editCouponFormFactory;
 
-    /** @var CouponsRepository @inject */
-    public $couponsRepository;
+    #[Inject]
+    public CouponsRepository $couponsRepository;
 
-    /** @var ExcelFactory @inject */
-    public $excelFactory;
+    #[Inject]
+    public ExcelFactory $excelFactory;
 
     /**
      * @admin-access-level read
