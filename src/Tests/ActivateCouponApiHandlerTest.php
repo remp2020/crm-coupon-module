@@ -2,7 +2,7 @@
 
 namespace Crm\CouponModule\Tests;
 
-use Crm\ApiModule\Authorization\ApiAuthorizationInterface;
+use Crm\ApiModule\Models\Authorization\ApiAuthorizationInterface;
 use Crm\ApiModule\Tests\ApiTestTrait;
 use Crm\ApplicationModule\Tests\DatabaseTestCase;
 use Crm\CouponModule\Api\ActivateCouponApiHandler;

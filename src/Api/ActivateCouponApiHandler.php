@@ -2,8 +2,8 @@
 
 namespace Crm\CouponModule\Api;
 
-use Crm\ApiModule\Api\ApiHandler;
-use Crm\ApiModule\Api\JsonValidationTrait;
+use Crm\ApiModule\Models\Api\ApiHandler;
+use Crm\ApiModule\Models\Api\JsonValidationTrait;
 use Crm\CouponModule\CouponAlreadyAssignedException;
 use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Repository\CouponsRepository;
