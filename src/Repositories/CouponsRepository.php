@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\CouponModule\Repository;
+namespace Crm\CouponModule\Repositories;
 
 use Crm\ApplicationModule\Repository;
 use Crm\ApplicationModule\Selection;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\CouponModule;
+namespace Crm\CouponModule\Generator;
 
 class CannotAssignCouponException extends \Exception
 {

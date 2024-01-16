@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\CouponModule\DataProvider;
+namespace Crm\CouponModule\DataProviders;
 
 use Crm\ApplicationModule\DataProvider\DataProviderException;
 use Crm\UsersModule\DataProvider\FilterUsersFormDataProviderInterface;

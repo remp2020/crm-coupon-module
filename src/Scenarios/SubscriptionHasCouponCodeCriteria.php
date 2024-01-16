@@ -1,6 +1,6 @@
 <?php
 
-namespace Crm\CouponModule\Repository;
+namespace Crm\CouponModule\Scenarios;
 
 use Contributte\Translation\Translator;
 use Crm\ApplicationModule\Criteria\ScenarioParams\BooleanParam;
