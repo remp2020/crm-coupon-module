@@ -8,7 +8,7 @@ use Crm\ApplicationModule\ExcelFactory;
 use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\EditCouponFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
-use Crm\CouponModule\Repository\CouponsRepository;
+use Crm\CouponModule\Repositories\CouponsRepository;
 use DateTime;
 use Nette\Application\Attributes\Persistent;
 use Nette\Application\BadRequestException;

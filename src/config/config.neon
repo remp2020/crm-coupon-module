@@ -3,17 +3,17 @@ services:
 		setup:
 			- addModule(Crm\CouponModule\CouponModule())
 
-	couponsRepository: Crm\CouponModule\Repository\CouponsRepository
-	couponCodesRepository: Crm\CouponModule\Repository\CouponCodesRepository
+	couponsRepository: Crm\CouponModule\Repositories\CouponsRepository
+	couponCodesRepository: Crm\CouponModule\Repositories\CouponCodesRepository
 
-	- Crm\CouponModule\DataProvider\FilterUsersFormDataProvider
+	- Crm\CouponModule\DataProviders\FilterUsersFormDataProvider
 	- Crm\CouponModule\Forms\AdminFilterFormFactory
 	- Crm\CouponModule\Forms\GenerateFormFactory
 	- Crm\CouponModule\Forms\EditCouponFormFactory
 
-	- Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria
+	- Crm\CouponModule\Scenarios\SubscriptionHasCouponCodeCriteria
 
 	couponGenerator:
-		factory: Crm\CouponModule\DefaultCouponGenerator
+		factory: Crm\CouponModule\Generator\DefaultCouponGenerator
 
 	activateCouponApiHandler: Crm\CouponModule\Api\ActivateCouponApiHandler

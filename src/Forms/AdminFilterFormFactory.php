@@ -2,7 +2,7 @@
 
 namespace Crm\CouponModule\Forms;
 
-use Crm\CouponModule\Repository\CouponsRepository;
+use Crm\CouponModule\Repositories\CouponsRepository;
 use Nette\Application\LinkGenerator;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;

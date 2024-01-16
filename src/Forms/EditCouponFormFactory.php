@@ -2,8 +2,8 @@
 
 namespace Crm\CouponModule\Forms;
 
-use Crm\CouponModule\CouponGeneratorInterface;
-use Crm\CouponModule\Repository\CouponsRepository;
+use Crm\CouponModule\Generator\CouponGeneratorInterface;
+use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;

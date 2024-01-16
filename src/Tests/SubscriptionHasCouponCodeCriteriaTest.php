@@ -2,9 +2,9 @@
 
 namespace Crm\CouponModule\Tests;
 
-use Crm\CouponModule\Repository\CouponCodesRepository;
-use Crm\CouponModule\Repository\CouponsRepository;
-use Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria;
+use Crm\CouponModule\Repositories\CouponCodesRepository;
+use Crm\CouponModule\Repositories\CouponsRepository;
+use Crm\CouponModule\Scenarios\SubscriptionHasCouponCodeCriteria;
 use Crm\PaymentsModule\Tests\PaymentsTestCase;
 use Crm\SubscriptionsModule\Builder\SubscriptionTypeBuilder;
 use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;

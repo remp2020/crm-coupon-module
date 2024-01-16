@@ -4,9 +4,9 @@ namespace Crm\CouponModule\Api;
 
 use Crm\ApiModule\Models\Api\ApiHandler;
 use Crm\ApiModule\Models\Api\JsonValidationTrait;
-use Crm\CouponModule\CouponAlreadyAssignedException;
-use Crm\CouponModule\CouponExpiredException;
-use Crm\CouponModule\Repository\CouponsRepository;
+use Crm\CouponModule\Generator\CouponAlreadyAssignedException;
+use Crm\CouponModule\Generator\CouponExpiredException;
+use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use DateTime;

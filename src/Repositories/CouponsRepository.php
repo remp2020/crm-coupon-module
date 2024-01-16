@@ -4,9 +4,9 @@ namespace Crm\CouponModule\Repositories;
 
 use Crm\ApplicationModule\Repository;
 use Crm\ApplicationModule\Selection;
-use Crm\CouponModule\CouponAlreadyAssignedException;
-use Crm\CouponModule\CouponExpiredException;
 use Crm\CouponModule\Events\CouponActivatedEvent;
+use Crm\CouponModule\Generator\CouponAlreadyAssignedException;
+use Crm\CouponModule\Generator\CouponExpiredException;
 use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
 use DateTime;
 use League\Event\Emitter;

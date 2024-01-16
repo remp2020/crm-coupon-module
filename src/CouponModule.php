@@ -11,8 +11,8 @@ use Crm\ApplicationModule\DataProvider\DataProviderManager;
 use Crm\ApplicationModule\Menu\MenuContainerInterface;
 use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\CouponModule\Api\ActivateCouponApiHandler;
-use Crm\CouponModule\DataProvider\FilterUsersFormDataProvider;
-use Crm\CouponModule\Repository\SubscriptionHasCouponCodeCriteria;
+use Crm\CouponModule\DataProviders\FilterUsersFormDataProvider;
+use Crm\CouponModule\Scenarios\SubscriptionHasCouponCodeCriteria;
 use Crm\UsersModule\Auth\UserTokenAuthorization;
 
 class CouponModule extends CrmModule

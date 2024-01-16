@@ -2,7 +2,7 @@
 
 namespace Crm\CouponModule\Generator;
 
-use Crm\CouponModule\Repository\CouponCodesRepository;
+use Crm\CouponModule\Repositories\CouponCodesRepository;
 use Nette\Database\Table\ActiveRow;
 
 class DefaultCouponGenerator implements CouponGeneratorInterface
