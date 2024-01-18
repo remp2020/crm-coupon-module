@@ -8,7 +8,7 @@ use Crm\CouponModule\Generator\CouponAlreadyAssignedException;
 use Crm\CouponModule\Generator\CouponExpiredException;
 use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
-use Crm\UsersModule\Repository\UsersRepository;
+use Crm\UsersModule\Repositories\UsersRepository;
 use DateTime;
 use Nette\Http\Response;
 use Tomaj\NetteApi\Response\JsonApiResponse;

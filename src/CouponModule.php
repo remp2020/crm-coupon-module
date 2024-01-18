@@ -13,7 +13,7 @@ use Crm\ApplicationModule\Menu\MenuItem;
 use Crm\CouponModule\Api\ActivateCouponApiHandler;
 use Crm\CouponModule\DataProviders\FilterUsersFormDataProvider;
 use Crm\CouponModule\Scenarios\SubscriptionHasCouponCodeCriteria;
-use Crm\UsersModule\Auth\UserTokenAuthorization;
+use Crm\UsersModule\Models\Auth\UserTokenAuthorization;
 
 class CouponModule extends CrmModule
 {
