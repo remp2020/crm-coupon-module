@@ -6,10 +6,10 @@ use Crm\CouponModule\Repositories\CouponCodesRepository;
 use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\CouponModule\Scenarios\SubscriptionHasCouponCodeCriteria;
 use Crm\PaymentsModule\Tests\PaymentsTestCase;
-use Crm\SubscriptionsModule\Builder\SubscriptionTypeBuilder;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\SubscriptionsModule\Models\Builder\SubscriptionTypeBuilder;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Crm\SubscriptionsModule\Seeders\SubscriptionTypeNamesSeeder;
 use PHPUnit\Framework\Attributes\DataProvider;
 

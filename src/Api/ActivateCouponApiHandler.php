@@ -7,7 +7,7 @@ use Crm\ApiModule\Models\Api\JsonValidationTrait;
 use Crm\CouponModule\Generator\CouponAlreadyAssignedException;
 use Crm\CouponModule\Generator\CouponExpiredException;
 use Crm\CouponModule\Repositories\CouponsRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Crm\UsersModule\Repository\UsersRepository;
 use DateTime;
 use Nette\Http\Response;

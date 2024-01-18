@@ -4,10 +4,10 @@ namespace Crm\CouponModule\Forms;
 
 use Crm\CouponModule\Generator\CouponGeneratorInterface;
 use Crm\CouponModule\Repositories\CouponsRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypeNamesRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionTypesRepository;
-use Crm\SubscriptionsModule\Repository\SubscriptionsRepository;
-use Crm\SubscriptionsModule\Subscription\SubscriptionTypeHelper;
+use Crm\SubscriptionsModule\Models\Subscription\SubscriptionTypeHelper;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
+use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
