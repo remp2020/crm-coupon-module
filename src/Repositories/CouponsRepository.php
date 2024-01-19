@@ -2,8 +2,8 @@
 
 namespace Crm\CouponModule\Repositories;
 
-use Crm\ApplicationModule\Repository;
-use Crm\ApplicationModule\Selection;
+use Crm\ApplicationModule\Models\Database\Repository;
+use Crm\ApplicationModule\Models\Database\Selection;
 use Crm\CouponModule\Events\CouponActivatedEvent;
 use Crm\CouponModule\Generator\CouponAlreadyAssignedException;
 use Crm\CouponModule\Generator\CouponExpiredException;

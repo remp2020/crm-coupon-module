@@ -2,7 +2,7 @@
 
 namespace Crm\CouponModule\Repositories;
 
-use Crm\ApplicationModule\Repository;
+use Crm\ApplicationModule\Models\Database\Repository;
 use Crm\CouponModule\Generator\CouponAlreadyExistsException;
 use Nette\Database\UniqueConstraintViolationException;
 

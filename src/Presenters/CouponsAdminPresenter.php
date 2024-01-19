@@ -3,8 +3,8 @@
 namespace Crm\CouponModule\Presenters;
 
 use Crm\AdminModule\Presenters\AdminPresenter;
-use Crm\ApplicationModule\Components\PreviousNextPaginator;
-use Crm\ApplicationModule\ExcelFactory;
+use Crm\ApplicationModule\Components\PreviousNextPaginator\PreviousNextPaginator;
+use Crm\ApplicationModule\Models\Exports\ExcelFactory;
 use Crm\CouponModule\Forms\AdminFilterFormFactory;
 use Crm\CouponModule\Forms\EditCouponFormFactory;
 use Crm\CouponModule\Forms\GenerateFormFactory;
