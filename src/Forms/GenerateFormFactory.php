@@ -4,7 +4,7 @@ namespace Crm\CouponModule\Forms;
 
 use Crm\CouponModule\Generator\CouponGeneratorInterface;
 use Crm\CouponModule\Repositories\CouponsRepository;
-use Crm\SubscriptionsModule\Models\Subscription\SubscriptionTypeHelper;
+use Crm\PaymentsModule\Forms\Controls\SubscriptionTypesSelectItemsBuilder;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
 use Nette\Application\UI\Form;
@@ -18,34 +18,16 @@ class GenerateFormFactory
     private const MIN_COUPON_LENGTH = 2;
     private const MAX_COUPON_LENGTH = 100;
 
-    private $subscriptionTypesRepository;
-
-    private $subscriptionTypeNamesRepository;
-
-    private $couponsRepository;
-
-    private $couponGenerator;
-
-    private $translator;
-
-    private $subscriptionTypeHelper;
-
     public $onSuccess;
 
     public function __construct(
-        SubscriptionTypesRepository $subscriptionTypesRepository,
-        SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
-        CouponsRepository $couponsRepository,
-        CouponGeneratorInterface $couponGenerator,
-        Translator $translator,
-        SubscriptionTypeHelper $subscriptionTypeHelper
+        private readonly SubscriptionTypesRepository $subscriptionTypesRepository,
+        private readonly SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
+        private readonly CouponsRepository $couponsRepository,
+        private readonly CouponGeneratorInterface $couponGenerator,
+        private readonly Translator $translator,
+        private readonly SubscriptionTypesSelectItemsBuilder $subscriptionTypesSelectItemsBuilder,
     ) {
-        $this->subscriptionTypesRepository = $subscriptionTypesRepository;
-        $this->subscriptionTypeNamesRepository = $subscriptionTypeNamesRepository;
-        $this->couponsRepository = $couponsRepository;
-        $this->couponGenerator = $couponGenerator;
-        $this->translator = $translator;
-        $this->subscriptionTypeHelper = $subscriptionTypeHelper;
     }
 
     public function create(): Form
@@ -59,9 +41,13 @@ class GenerateFormFactory
             ->setOption('description', 'coupon.admin.component.generate_form.type.description')
             ->setRequired('coupon.admin.component.generate_form.type.required');
 
-        $subscriptionTypePairs = $this->subscriptionTypeHelper->getPairs($this->subscriptionTypesRepository->getAllActive(), true);
+        $subscriptionTypes = $this->subscriptionTypesRepository->getAllActive()->fetchAll();
 
-        $subscriptionTypesElem = $form->addSelect('subscription_type_id', 'coupon.admin.component.generate_form.subscription_type_id.label', $subscriptionTypePairs)
+        $subscriptionTypesElem = $form->addSelect(
+            'subscription_type_id',
+            'coupon.admin.component.generate_form.subscription_type_id.label',
+            $this->subscriptionTypesSelectItemsBuilder->buildWithDescription($subscriptionTypes)
+        )
             ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_id.placeholder')
             ->setOption('description', 'coupon.admin.component.generate_form.subscription_type_id.description')
             ->setRequired('coupon.admin.component.generate_form.subscription_type_id.required');
