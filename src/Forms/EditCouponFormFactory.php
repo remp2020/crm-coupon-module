@@ -2,12 +2,8 @@
 
 namespace Crm\CouponModule\Forms;
 
-use Crm\CouponModule\Generator\CouponGeneratorInterface;
 use Crm\CouponModule\Repositories\CouponsRepository;
-use Crm\SubscriptionsModule\Models\Subscription\SubscriptionTypeHelper;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
-use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
-use Crm\SubscriptionsModule\Repositories\SubscriptionsRepository;
 use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
@@ -15,38 +11,22 @@ use Tomaj\Form\Renderer\BootstrapRenderer;
 
 class EditCouponFormFactory
 {
-    private SubscriptionTypesRepository $subscriptionTypesRepository;
-
-    private SubscriptionsRepository $subscriptionsRepository;
-
     private SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository;
 
     private CouponsRepository $couponsRepository;
 
-    private CouponGeneratorInterface $couponGenerator;
-
     private Translator $translator;
-
-    private SubscriptionTypeHelper $subscriptionTypeHelper;
 
     public $onSuccess;
 
     public function __construct(
-        SubscriptionsRepository $subscriptionsRepository,
-        SubscriptionTypesRepository $subscriptionTypesRepository,
         SubscriptionTypeNamesRepository $subscriptionTypeNamesRepository,
         CouponsRepository $couponsRepository,
-        CouponGeneratorInterface $couponGenerator,
         Translator $translator,
-        SubscriptionTypeHelper $subscriptionTypeHelper
     ) {
-        $this->subscriptionTypesRepository = $subscriptionTypesRepository;
-        $this->subscriptionsRepository = $subscriptionsRepository;
         $this->subscriptionTypeNamesRepository = $subscriptionTypeNamesRepository;
         $this->couponsRepository = $couponsRepository;
-        $this->couponGenerator = $couponGenerator;
         $this->translator = $translator;
-        $this->subscriptionTypeHelper = $subscriptionTypeHelper;
     }
 
     public function create(int $couponId): Form
