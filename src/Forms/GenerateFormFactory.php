@@ -2,12 +2,12 @@
 
 namespace Crm\CouponModule\Forms;
 
+use Crm\ApplicationModule\UI\Form;
 use Crm\CouponModule\Generator\CouponGeneratorInterface;
 use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\PaymentsModule\Forms\Controls\SubscriptionTypesSelectItemsBuilder;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypesRepository;
-use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
 use Ramsey\Uuid\Uuid;

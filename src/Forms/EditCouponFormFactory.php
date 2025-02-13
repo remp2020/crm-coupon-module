@@ -2,9 +2,9 @@
 
 namespace Crm\CouponModule\Forms;
 
+use Crm\ApplicationModule\UI\Form;
 use Crm\CouponModule\Repositories\CouponsRepository;
 use Crm\SubscriptionsModule\Repositories\SubscriptionTypeNamesRepository;
-use Nette\Application\UI\Form;
 use Nette\Localization\Translator;
 use Nette\Utils\DateTime;
 use Tomaj\Form\Renderer\BootstrapRenderer;

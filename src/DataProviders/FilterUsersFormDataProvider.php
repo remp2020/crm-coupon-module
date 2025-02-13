@@ -3,8 +3,8 @@
 namespace Crm\CouponModule\DataProviders;
 
 use Crm\ApplicationModule\Models\DataProvider\DataProviderException;
+use Crm\ApplicationModule\UI\Form;
 use Crm\UsersModule\DataProviders\FilterUsersFormDataProviderInterface;
-use Nette\Application\UI\Form;
 use Nette\Database\Table\Selection;
 use Nette\Localization\Translator;
 
