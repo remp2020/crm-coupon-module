@@ -54,9 +54,6 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         ];
     }
 
-    /**
-     * @group coupon
-     */
     public function testNonExistingCode()
     {
         $userRow = $this->userManager->addNewUser('test@test.sk');
@@ -78,9 +75,6 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $this->assertEquals('coupon_doesnt_exist', $payload['code']);
     }
 
-    /**
-     * @group coupon
-     */
     public function testAlreadyUsedCode(): void
     {
         [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
@@ -98,9 +92,6 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $this->assertEquals('coupon_already_used', $payload['code']);
     }
 
-    /**
-     * @group coupon
-     */
     public function testSuccessActivation(): void
     {
         [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
@@ -114,9 +105,6 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
         $this->assertEquals($validCouponRow->id, $payload['coupon_id']);
     }
 
-    /**
-     * @group coupon
-     */
     public function testExpiredCoupon(): void
     {
         [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization] = $this->prepareDataForTest();
