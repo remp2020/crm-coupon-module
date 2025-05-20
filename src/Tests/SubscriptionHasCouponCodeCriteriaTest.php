@@ -110,7 +110,7 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
                 $subscriptionTypeRow->id,
                 $subscriptionTypeNameRow->id,
                 $counponCodeRow->id,
-                true
+                true,
             );
 
             $subscriptionRow = $subscriptionsRepository->add(
@@ -123,7 +123,7 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
                 null,
                 null,
                 null,
-                false
+                false,
             );
 
             $couponsRepository->update($couponRow, [
@@ -146,7 +146,7 @@ class SubscriptionHasCouponCodeCriteriaTest extends PaymentsTestCase
             null,
             null,
             null,
-            false
+            false,
         );
         $subscriptionSelection = $subscriptionsRepository->getTable()->where('subscriptions.id', $subscriptionRow->id);
         return [$subscriptionSelection, $subscriptionRow];

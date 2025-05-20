@@ -46,7 +46,7 @@ class GenerateFormFactory
         $subscriptionTypesElem = $form->addSelect(
             'subscription_type_id',
             'coupon.admin.component.generate_form.subscription_type_id.label',
-            $this->subscriptionTypesSelectItemsBuilder->buildWithDescription($subscriptionTypes)
+            $this->subscriptionTypesSelectItemsBuilder->buildWithDescription($subscriptionTypes),
         )
             ->setHtmlAttribute('placeholder', 'coupon.admin.component.generate_form.subscription_type_id.placeholder')
             ->setOption('description', 'coupon.admin.component.generate_form.subscription_type_id.description')
@@ -116,7 +116,7 @@ class GenerateFormFactory
                 $values->subscription_type_name_id,
                 $couponCode->id,
                 $values->is_paid,
-                $expiresAt
+                $expiresAt,
             );
         }
 

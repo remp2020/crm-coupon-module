@@ -27,7 +27,7 @@ class ActivateCouponApiHandler extends ApiHandler
     public function __construct(
         CouponsRepository $couponsRepository,
         UsersRepository $usersRepository,
-        SubscriptionsRepository $subscriptionsRepository
+        SubscriptionsRepository $subscriptionsRepository,
     ) {
         $this->couponsRepository = $couponsRepository;
         $this->usersRepository = $usersRepository;

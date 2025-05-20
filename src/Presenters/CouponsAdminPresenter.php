@@ -58,7 +58,7 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->type,
             $this->email,
             $this->created_at_from ? new DateTime($this->created_at_from) : null,
-            $this->created_at_to ? new DateTime($this->created_at_to) : null
+            $this->created_at_to ? new DateTime($this->created_at_to) : null,
         );
 
         $pnp = new PreviousNextPaginator();
@@ -86,8 +86,8 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->flashMessage($this->translator->translate(
                 'coupon.admin.edit_form.cant_edit',
                 [
-                    'coupon' => $coupon->coupon_code->code
-                ]
+                    'coupon' => $coupon->coupon_code->code,
+                ],
             ), 'info');
             $this->redirect('default');
         }
@@ -101,8 +101,8 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->flashMessage($this->translator->translate(
                 'coupon.admin.edit_form.success',
                 [
-                    'coupon' => $coupon->coupon_code->code
-                ]
+                    'coupon' => $coupon->coupon_code->code,
+                ],
             ));
             $this->redirect('default');
         };
@@ -151,7 +151,7 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->flashMessage($this->translator->translate('coupon.admin.component.generate_form.success'));
             $this->redirect('default', [
                 'type' => $values['type'],
-                'text' => null
+                'text' => null,
             ]);
         };
         return $form;
@@ -167,7 +167,7 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->type,
             $this->email,
             $this->created_at_from ? new DateTime($this->created_at_from) : null,
-            $this->created_at_to ? new DateTime($this->created_at_to) : null
+            $this->created_at_to ? new DateTime($this->created_at_to) : null,
         )->fetchAll();
 
         $excel = $this->excelFactory->createExcel('Coupons Export');
@@ -183,7 +183,7 @@ class CouponsAdminPresenter extends AdminPresenter
                 $coupon->subscription_type_name->type,
                 $coupon->created_at,
                 $coupon->expires_at,
-                $coupon->assigned_at
+                $coupon->assigned_at,
             ];
         }
 
@@ -217,7 +217,7 @@ class CouponsAdminPresenter extends AdminPresenter
             $this->translator->translate('coupon.admin.default.fields.subscription_type_name'),
             $this->translator->translate('coupon.admin.default.fields.created_at'),
             $this->translator->translate('coupon.admin.default.fields.expires_at'),
-            $this->translator->translate('coupon.admin.default.fields.assigned_at')
+            $this->translator->translate('coupon.admin.default.fields.assigned_at'),
         ];
     }
 }

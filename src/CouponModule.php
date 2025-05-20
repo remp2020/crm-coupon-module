@@ -24,21 +24,21 @@ class CouponModule extends CrmModule
             '#coupons',
             'fa fa-tag',
             791,
-            true
+            true,
         );
 
         $menuItem = new MenuItem(
             $this->translator->translate('coupon.menu.coupons'),
             ':Coupon:CouponsAdmin:default',
             'fa fa-tag',
-            100
+            100,
         );
         $mainMenu->addChild($menuItem);
         $menuItem = new MenuItem(
             $this->translator->translate('coupon.menu.generator'),
             ':Coupon:CouponsAdmin:generate',
             'fa fa-cogs',
-            200
+            200,
         );
         $mainMenu->addChild($menuItem);
 
@@ -51,8 +51,8 @@ class CouponModule extends CrmModule
             new ApiRoute(
                 new ApiIdentifier('1', 'coupon', 'activate'),
                 ActivateCouponApiHandler::class,
-                UserTokenAuthorization::class
-            )
+                UserTokenAuthorization::class,
+            ),
         );
     }
 
@@ -60,7 +60,7 @@ class CouponModule extends CrmModule
     {
         $dataProviderManager->registerDataProvider(
             'users.dataprovider.users_filter_form',
-            $this->getInstance(FilterUsersFormDataProvider::class)
+            $this->getInstance(FilterUsersFormDataProvider::class),
         );
     }
 

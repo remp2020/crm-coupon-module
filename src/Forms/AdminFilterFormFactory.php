@@ -21,7 +21,7 @@ class AdminFilterFormFactory
     public function __construct(
         CouponsRepository $couponsRepository,
         Translator $translator,
-        LinkGenerator $linkGenerator
+        LinkGenerator $linkGenerator,
     ) {
         $this->couponsRepository = $couponsRepository;
         $this->translator = $translator;
@@ -52,7 +52,7 @@ class AdminFilterFormFactory
         ]);
         if (count($types) >= 500) { // too much for select2 initialization, use AJAX
             $typeElem->getControlPrototype()->addAttributes([
-                'data-ajax-url' => $this->linkGenerator->link('Coupon:CouponsAdmin:typesJson')
+                'data-ajax-url' => $this->linkGenerator->link('Coupon:CouponsAdmin:typesJson'),
             ]);
         }
 

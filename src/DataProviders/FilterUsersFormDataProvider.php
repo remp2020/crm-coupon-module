@@ -13,7 +13,7 @@ class FilterUsersFormDataProvider implements FilterUsersFormDataProviderInterfac
     private $translator;
 
     public function __construct(
-        Translator $translator
+        Translator $translator,
     ) {
         $this->translator = $translator;
     }
@@ -41,7 +41,7 @@ class FilterUsersFormDataProvider implements FilterUsersFormDataProviderInterfac
             ->setHtmlAttribute('placeholder', $this->translator->translate('coupon.admin.filter_users.coupon.placeholder'));
 
         $form->setDefaults([
-            'coupon' => $this->getCoupon($formData)
+            'coupon' => $this->getCoupon($formData),
         ]);
 
         return $form;

@@ -26,7 +26,7 @@ class CouponsRepository extends Repository
         SubscriptionsRepository $subscriptionsRepository,
         Explorer $database,
         Emitter $emitter,
-        Storage $cacheStorage = null
+        Storage $cacheStorage = null,
     ) {
         parent::__construct($database, $cacheStorage);
         $this->subscriptionsRepository = $subscriptionsRepository;
@@ -44,7 +44,7 @@ class CouponsRepository extends Repository
             'is_paid' => $isPaid,
             'created_at' => new \DateTime(),
             'updated_at' => new \DateTime(),
-            'expires_at' => $expiresAt
+            'expires_at' => $expiresAt,
         ]);
     }
 
@@ -64,7 +64,7 @@ class CouponsRepository extends Repository
         string $type = null,
         string $email = null,
         DateTime $createdAtFrom = null,
-        DateTime $createdAtTo = null
+        DateTime $createdAtTo = null,
     ): Selection {
         $query = $this->all();
         if ($coupon) {
@@ -124,7 +124,7 @@ class CouponsRepository extends Repository
             null,
             null,
             null,
-            $sendEmail
+            $sendEmail,
         );
 
         $this->update($coupon, [

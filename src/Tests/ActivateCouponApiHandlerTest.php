@@ -157,7 +157,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
             $subscriptionTypeNamesRow->id,
             $validCouponCodeRow->id,
             0,
-            null
+            null,
         );
 
         $expiredCouponRow = $this->couponsRepository->add(
@@ -167,7 +167,7 @@ class ActivateCouponApiHandlerTest extends DatabaseTestCase
             $subscriptionTypeNamesRow->id,
             $expiredCouponCodeRow->id,
             0,
-            new \DateTime('-1 hour')
+            new \DateTime('-1 hour'),
         );
 
         return [$userRow, $validCouponRow, $validCouponCodeRow, $expiredCouponRow, $expiredCouponCodeRow, $userTokenAuthorization];

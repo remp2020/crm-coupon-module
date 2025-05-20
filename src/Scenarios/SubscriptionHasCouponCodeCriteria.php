@@ -24,7 +24,7 @@ class SubscriptionHasCouponCodeCriteria implements ScenariosCriteriaInterface
         return [
             new BooleanParam(
                 self::KEY,
-                $this->translator->translate('coupon.admin.scenarios.subscription_has_coupon_code.label')
+                $this->translator->translate('coupon.admin.scenarios.subscription_has_coupon_code.label'),
             ),
         ];
     }
