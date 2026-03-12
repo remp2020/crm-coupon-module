@@ -26,7 +26,7 @@ class CouponsRepository extends Repository
         SubscriptionsRepository $subscriptionsRepository,
         Explorer $database,
         Emitter $emitter,
-        Storage $cacheStorage = null,
+        ?Storage $cacheStorage = null,
     ) {
         parent::__construct($database, $cacheStorage);
         $this->subscriptionsRepository = $subscriptionsRepository;
@@ -60,11 +60,11 @@ class CouponsRepository extends Repository
     }
 
     final public function search(
-        string $coupon = null,
-        string $type = null,
-        string $email = null,
-        DateTime $createdAtFrom = null,
-        DateTime $createdAtTo = null,
+        ?string $coupon = null,
+        ?string $type = null,
+        ?string $email = null,
+        ?DateTime $createdAtFrom = null,
+        ?DateTime $createdAtTo = null,
     ): Selection {
         $query = $this->all();
         if ($coupon) {
